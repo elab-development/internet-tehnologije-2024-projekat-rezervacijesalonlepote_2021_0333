@@ -14,9 +14,10 @@ return new class extends Migration
     {
         Schema::create('klijents', function (Blueprint $table) {
             $table->id();
-            
-            $table->string('Telefon');
             $table->foreignIdFor(User::class);
+            
+            $table->string('telefon');
+          
             $table->timestamps();
         });
     }

@@ -17,7 +17,10 @@ class TipUslugeFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'naziv'=>fake()->sentence(2),
+            'cena'=>fake()->numberBetween(1800,2500),
+            'opis'=>fake()->sentence(4),
+            'trajanje'=>fake()->dateTime()
         ];
     }
 }

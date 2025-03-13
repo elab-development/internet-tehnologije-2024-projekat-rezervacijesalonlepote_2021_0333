@@ -1,8 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Models\Klijent;
+use App\Models\Radnica;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -13,6 +15,14 @@ return new class extends Migration
     {
         Schema::create('termins', function (Blueprint $table) {
             $table->id();
+            $table->date('datum');
+            $table->dateTime('vreme');
+            $table->boolean('ukupnaCena');
+            $table->dateTime('ukupnoTrajanje');
+            $table->foreignIdFor(Radnica::class);
+            $table->foreignIdFor(Klijent::class);
+
+            
             $table->timestamps();
         });
     }

@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('tip_usluges', function (Blueprint $table) {
             $table->id();
+            $table->string('naziv');
+            $table->double('cena');
+            $table->double('trajanje');
+            $table->text('opis');
             $table->timestamps();
         });
     }
