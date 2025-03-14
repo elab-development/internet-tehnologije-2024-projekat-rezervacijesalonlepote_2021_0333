@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->date('datum');
             $table->dateTime('vreme');
-            $table->boolean('ukupnaCena');
-            $table->dateTime('ukupnoTrajanje');
+            $table->double('ukupnaCena');
+            $table->dateTime('trajanje');
             $table->foreignIdFor(Radnica::class);
             $table->foreignIdFor(Klijent::class);
 

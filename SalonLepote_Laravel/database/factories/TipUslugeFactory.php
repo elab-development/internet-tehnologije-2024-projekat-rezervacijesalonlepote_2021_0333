@@ -20,7 +20,7 @@ class TipUslugeFactory extends Factory
             'naziv'=>fake()->sentence(2),
             'cena'=>fake()->numberBetween(1800,2500),
             'opis'=>fake()->sentence(4),
-            'trajanje'=>fake()->dateTime()
+            'trajanje'=>fake()->numberBetween(30,120)
         ];
     }
 }

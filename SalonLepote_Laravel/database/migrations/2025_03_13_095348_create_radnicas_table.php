@@ -14,7 +14,6 @@ return new class extends Migration
     {
         Schema::create('radnicas', function (Blueprint $table) {
             $table->id();
-            $table->enum('uloga',['radnik', 'admin']);
             $table->foreignIdFor(User::class);
             $table->timestamps();
         });

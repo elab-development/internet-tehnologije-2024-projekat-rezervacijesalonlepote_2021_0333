@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
+use App\Models\Radnica;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class RadnicaSeeder extends Seeder
 {
@@ -12,6 +14,11 @@ class RadnicaSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $users = User::where('role','radnik')->get();
+        forEach($users as $user){
+            Radnica::create([
+                'user_id'=>$user->id
+            ]);
+        }
     }
 }

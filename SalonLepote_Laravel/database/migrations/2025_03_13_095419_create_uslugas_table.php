@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Termin;
+use App\Models\TipUsluge;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -15,6 +16,7 @@ return new class extends Migration
         Schema::create('uslugas', function (Blueprint $table) {
             $table->unsignedInteger('redniBroj', true);
             $table->foreignIdFor(Termin::class)->constrained();
+            $table->foreignIdFor(TipUsluge::class)->constrained();
             $table->primary(['redniBroj', 'termin_id']);
             $table->timestamps();
         });
