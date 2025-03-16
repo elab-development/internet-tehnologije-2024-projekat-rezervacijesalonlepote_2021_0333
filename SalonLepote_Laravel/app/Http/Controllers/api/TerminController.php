@@ -2,17 +2,40 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Http\Controllers\Controller;
+use App\Models\Termin;
+use App\Models\Radnica;
 use Illuminate\Http\Request;
+use App\trait\CanLoadRelationShips;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
+use App\Http\Resources\TerminResource;
 
 class TerminController extends Controller
 {
+    use CanLoadRelationShips;
+    private $relations = ['radnica', 'klijent'];
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if (Gate::allows('viewAny', Termin::class)) {
+            $datum = $request->input('datum');
+            $radnica = $request->input('radnica');
+            $klijent = $request->input('klijent');
+            $termini = Termin::query()
+                ->when($datum, fn($datum, $query) => $query->withDatum($datum))
+                ->when($radnica, fn($radnica, $query) => $query->withRadnica($radnica))
+                ->when($klijent, fn($klijent, $query) => $query->withKlijent($klijent));
+
+            $query = $this->loadRelationships($termini);
+
+            return TerminResource::collection($query->latest()->paginate());
+        } else {
+            return response()->json([
+                'message' => 'Pristup odbijen za pregled termia'
+            ], 403);
+        }
     }
 
     /**
@@ -20,7 +43,24 @@ class TerminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (Gate::allows('create', Termin::class)) {
+
+            $validatedData = $request->validate([
+                'datum' => 'required|date',
+                'vreme' => 'required|time',
+                'ukupnaCena' => 'required|integer',
+                'trajanje' => 'required|integer',
+                'radnica_id' => 'required|integer|exists:radnicas,id',
+                'klijent_id' => 'required|integer|exists:klijent,id'
+            ]);
+
+            $radnica = Radnica::create($validatedData);
+            return new TerminResource($this->loadRelationships($radnica));
+        } else {
+            return response()->json([
+                'message' => 'Pristup odbijen za kreiranje termina'
+            ], 403);
+        }
     }
 
     /**
@@ -28,7 +68,14 @@ class TerminController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $termin = Termin::findOrFail($id);
+        if (Gate::allows('view', $termin)) {
+            return new TerminResource($termin);
+        } else {
+            return response()->json([
+                'message' => 'Pristup odbijen za pregled termina'
+            ], 403);
+        }
     }
 
     /**
@@ -36,7 +83,21 @@ class TerminController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $termin = Termin::findOrFail($id);
+        if (Gate::allows('update', $termin)) {
+
+            $validatedData = $request->validate([
+                'datum' => 'required|date',
+                'vreme' => 'required|time'
+            ]);
+
+            $termin->update($validatedData);
+            return new TerminResource($this->loadRelationships($termin));
+        } else {
+            return response()->json([
+                'message' => 'Pristup odbijen za azuriranje termina'
+            ], 403);
+        }
     }
 
     /**
@@ -44,6 +105,16 @@ class TerminController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $termin = Termin::findOrFail($id);
+        if (Gate::allows('delete', $termin)) {
+            $termin->delete();
+            return response()->json([
+                'message' => 'Uspesno brisanje termina'
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Pristup odbijen za brisanje termina'
+            ], 403);
+        }
     }
 }
