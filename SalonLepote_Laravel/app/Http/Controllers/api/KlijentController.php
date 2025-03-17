@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\KlijentResource;
 use App\Models\Klijent;
 use App\trait\CanLoadRelationShips;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -20,8 +21,11 @@ class KlijentController extends Controller
 
     {
         if (Gate::allows('viewAny', Klijent::class)) {
-            $ime = $request->imput('ime');
-            $klijenti = Klijent::query()->when($ime, fn($query, $ime) => $query->withIme($ime));
+            $ime = $request->input('ime');
+            $klijenti = Klijent::whereHas('user', function(Builder $query) use ($ime){
+                $query->where('name','like','%'.$ime.'%');
+            });
+            // $klijenti = Klijent::query()->when($ime, fn($query, $ime) => $query->withIme($ime));
             $query=$this->loadRelationships($klijenti);
             return KlijentResource::collection($query->latest()->paginate());
         } else {

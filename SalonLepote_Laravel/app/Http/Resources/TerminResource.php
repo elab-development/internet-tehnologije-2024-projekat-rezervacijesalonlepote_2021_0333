@@ -19,6 +19,7 @@ class TerminResource extends JsonResource
             'trajanje' => $this->trajanje,
             'vreme' => $this->vreme,
             'ukupnaCena' => $this->ukupnaCena,
+            'radnica_id'=>$this->radnica_id,
             'radnica' => new RadnicaResource($this->whenLoaded('radnica')),
             'klijent' => new KlijentResource($this->whenLoaded('klijent'))
         ];

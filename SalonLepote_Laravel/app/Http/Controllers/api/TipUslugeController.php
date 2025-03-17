@@ -16,14 +16,16 @@ class TipUslugeController extends Controller
     public function index(Request $request)
     {
         if (Gate::allows('viewAny', TipUsluge::class)) {
-            $naziv = $request->imput('naziv');
-            $cena = $request->imput('cena');
+            $naziv = $request->input('naziv');
+            $cenaOd = $request->input('cenaOd');
+            $cenaDo = $request->input('cenaDo');
+
 
             $tipovi = TipUsluge::query()
-                ->when($naziv, fn($query, $naziv) => $query->withIme($naziv))
-                ->when($cena, fn($query, $cena) => $query->withIme($cena));
-
-            return TipUsluge::collection($tipovi->latest()->paginate());
+                ->when($naziv, fn($query) => $query->withNaziv($naziv))
+                ->when($cenaOd, fn($query) => $query->withCenaOd($cenaOd))
+                ->when($cenaDo,fn($query)=> $query->withCenaDo($cenaDo));
+            return $tipovi->latest()->paginate();
         } else {
             return response()->json([
                 'message' => 'Pristup odbijen za pregled tipova usluga'

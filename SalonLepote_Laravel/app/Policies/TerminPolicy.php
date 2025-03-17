@@ -13,7 +13,7 @@ class TerminPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->role==='radica';
+        return $user->role==='radnik';
     }
 
     /**
@@ -21,7 +21,7 @@ class TerminPolicy
      */
     public function view(User $user, Termin $termin): bool
     {
-        return $user->role==='radica' || $user->id==$termin->klijent_id;
+        return $user->role==='radnik' || $user->id==$termin->klijent_id;
     }
 
     /**
@@ -29,7 +29,7 @@ class TerminPolicy
      */
     public function create(User $user): bool
     {
-        return $user->role==='radica' || $user->role==='klijent';
+        return $user->role==='radnik' || $user->role==='klijent';
     }
 
     /**
@@ -37,7 +37,7 @@ class TerminPolicy
      */
     public function update(User $user, Termin $termin): bool
     {
-        return $user->role==='radica';
+        return $user->role==='radnik';
     }
 
     /**
@@ -45,7 +45,7 @@ class TerminPolicy
      */
     public function delete(User $user, Termin $termin): bool
     {
-        return $user->role==='radica';
+        return $user->role==='radnik';
     }
 
     /**

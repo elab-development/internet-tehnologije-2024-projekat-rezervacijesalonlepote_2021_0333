@@ -33,7 +33,6 @@ class DatabaseSeeder extends Seeder
         TipUsluge::factory(5)->create();
         $this->call(KlijentSeeder::class);
         $this->call(RadnicaSeeder::class);
-        $this->call(RadnicaSeeder::class);
         $this->call(TerminSeeder::class);
         $this->call(UslugaSeeder::class);
         

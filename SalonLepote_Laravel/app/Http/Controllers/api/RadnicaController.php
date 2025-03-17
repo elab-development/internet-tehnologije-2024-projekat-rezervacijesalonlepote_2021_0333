@@ -9,6 +9,7 @@ use App\trait\CanLoadRelationShips;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Resources\RadnicaResource;
+use Illuminate\Database\Eloquent\Builder;
 
 class RadnicaController extends Controller
 {
@@ -19,8 +20,10 @@ class RadnicaController extends Controller
      */
     public function index(Request $request) {
         if(Gate::allows('viewAny',Radnica::class)){
-            $ime = $request->imput('ime');
-            $radnice = Radnica::query()->when($ime, fn($query, $ime) => $query->withIme($ime));
+            $ime = $request->input('ime');
+            $radnice = Radnica::whereHas('user', function(Builder $query) use ($ime){
+                $query->where('name','like','%'.$ime.'%');
+            });
             $query=$this->loadRelationships($radnice);
             return RadnicaResource::collection($query->latest()->paginate());
         }else{

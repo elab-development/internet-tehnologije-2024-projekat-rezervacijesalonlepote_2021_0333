@@ -56,9 +56,9 @@ class UslugaController extends Controller
      */
     public function show(string $id)
     {
-        $usluga = Usluga::findOrFail($id);
+        $usluga = Usluga::where('redniBroj',$id)->first();
         if (Gate::allows('view', $usluga)) {
-            return new UslugaResource($usluga);
+            return new UslugaResource($this->loadRelationships($usluga));
         } else {
             return response()->json([
                 'message' => 'Pristup odbijen za pregled usluge'

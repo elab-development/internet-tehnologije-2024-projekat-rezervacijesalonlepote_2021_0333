@@ -13,7 +13,7 @@ use App\Http\Resources\TerminResource;
 class TerminController extends Controller
 {
     use CanLoadRelationShips;
-    private $relations = ['radnica', 'klijent'];
+    private $relations = ['radnica','radnica.user', 'klijent'];
     /**
      * Display a listing of the resource.
      */
@@ -24,9 +24,9 @@ class TerminController extends Controller
             $radnica = $request->input('radnica');
             $klijent = $request->input('klijent');
             $termini = Termin::query()
-                ->when($datum, fn($datum, $query) => $query->withDatum($datum))
-                ->when($radnica, fn($radnica, $query) => $query->withRadnica($radnica))
-                ->when($klijent, fn($klijent, $query) => $query->withKlijent($klijent));
+                ->when($datum, fn($query,$datum) => $query->withDatum($datum))
+                ->when($radnica, fn($query,$radnica) => $query->withRadnica($radnica))
+                ->when($klijent, fn($query,$klijent) => $query->withKlijent($klijent));
 
             $query = $this->loadRelationships($termini);
 

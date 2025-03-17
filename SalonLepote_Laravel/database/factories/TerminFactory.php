@@ -20,7 +20,7 @@ class TerminFactory extends Factory
             'datum'=>fake()->date(),
             'vreme'=>fake()->dateTime(),
             'ukupnaCena'=>fake()->numberBetween(1800,5000),
-            'trajanje'=>fake()->dateTime()
+            'trajanje'=>fake()->numberBetween(30,120)
         ];
     }
 }

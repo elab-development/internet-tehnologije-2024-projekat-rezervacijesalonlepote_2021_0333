@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\User;
 use App\Models\Termin;
 use App\Models\Usluga;
+use App\Models\Klijent;
 use Illuminate\Auth\Access\Response;
 
 class UslugaPolicy
@@ -14,7 +15,7 @@ class UslugaPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->role === 'radnica';
+        return $user->role === 'radnik';
     }
 
     /**
@@ -22,8 +23,9 @@ class UslugaPolicy
      */
     public function view(User $user, Usluga $usluga): bool
     {
-        $termin = Termin::where(['id', $usluga->termin_id])->get();
-        return $user->role === 'radnica' || $user->id == $termin->klijent_id;
+        $termin = Termin::where('id', $usluga->termin_id)->first();
+        $klijent = Klijent::where('id',$termin->klijent_id)->first();
+        return $user->role === 'radnik' || ($klijent && $user->id === $klijent->user_id);
     }
 
     /**
@@ -31,7 +33,7 @@ class UslugaPolicy
      */
     public function create(User $user): bool
     {
-        return $user->role === 'radica' || $user->role === 'klijent';
+        return $user->role === 'radnik' || $user->role === 'klijent';
     }
 
     /**
@@ -47,7 +49,7 @@ class UslugaPolicy
      */
     public function delete(User $user, Usluga $usluga): bool
     {
-        return $user->role === 'radica';
+        return $user->role === 'radnik';
     }
 
     /**

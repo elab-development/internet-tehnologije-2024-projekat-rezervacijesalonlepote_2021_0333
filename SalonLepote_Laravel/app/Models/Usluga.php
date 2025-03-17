@@ -15,11 +15,11 @@ class Usluga extends Model
 
     public function termin(): BelongsTo
     {
-        return $this->belongsTo(Termin::class, 'klijent_id', 'id');
+        return $this->belongsTo(Termin::class, 'termin_id', 'id');
     }
 
     public function tipusluge(): BelongsTo
     {
-        return $this->belongsTo(TipUsluge::class, 'klijent_id', 'id');
+        return $this->belongsTo(TipUsluge::class, 'tip_usluge_id', 'id');
     }
 }
