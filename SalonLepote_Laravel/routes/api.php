@@ -25,6 +25,8 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::apiResource('tipUsluga', TipUslugeController::class);
     Route::apiResource('termini', TerminController::class);
     Route::post('/logout',[AuthController::class,'logout']);
+
+    Route::delete('/usluge/{redniBroj}/{termin_id}',[UslugaController::class, 'destroy']);
 });
 
 Route::post('/login',[AuthController::class,'login']);

@@ -38,8 +38,9 @@ class UslugaController extends Controller
         if (Gate::allows('create', Usluga::class)) {
 
             $validatedData = $request->validate([
-                'tip_usluge_id' => 'required|integer|exists:tip_usluge,id',
-                'termin_id' => 'required|integer|exists:termin,id'
+                'redniBroj'=>'required|integer',
+                'tip_usluge_id' => 'required|integer|exists:tip_usluges,id',
+                'termin_id' => 'required|integer|exists:termins,id'
             ]);
 
             $usluga = Usluga::create($validatedData);
@@ -77,9 +78,11 @@ class UslugaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($redniBroj, $termin_id)
     {
-        $usluga = Usluga::findOrFail($id);
+        $usluga = Usluga::where('redniBroj',$redniBroj)
+                            ->where('termin_id',$termin_id)
+                            ->firstOrFail();
         if (Gate::allows('delete', $usluga)) {
             $usluga->delete();
             return response()->json([

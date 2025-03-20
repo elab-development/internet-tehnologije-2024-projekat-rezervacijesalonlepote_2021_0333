@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\KlijentResource;
+use App\Models\User;
 use App\Models\Klijent;
-use App\trait\CanLoadRelationShips;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use App\trait\CanLoadRelationShips;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
+use App\Http\Resources\KlijentResource;
+use Illuminate\Database\Eloquent\Builder;
 
 class KlijentController extends Controller
 {
@@ -61,8 +62,11 @@ class KlijentController extends Controller
     public function update(Request $request, string $id)
     {
         $klijent = Klijent::where('id', $id)->firstOrFail();
+        $user = User::firstOrFail($klijent->user_id);
         if (Gate::allows('update', $klijent)) {
             $validatedData=$request->validate([
+                'name' => 'required|string|max:20',
+                'password' => 'nullable|string|min:8',
                 'telefon'=>'required|string'
             ]);
 
@@ -83,9 +87,13 @@ class KlijentController extends Controller
     public function destroy(string $id)
     {
         $klijent = Klijent::where('id', $id)->firstOrFail();
+        $user = User::findOrFail($klijent->user_id);
+        
         if (Gate::allows('delete', $klijent)) {
             
+
             $klijent->delete();
+            $user->delete();
             return response()->json([
                 'message' => 'Uspesno brisanje klijenta'
             ], 200);
