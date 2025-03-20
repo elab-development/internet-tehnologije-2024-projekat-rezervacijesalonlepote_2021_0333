@@ -17,7 +17,6 @@ class TerminFactory extends Factory
     public function definition(): array
     {
         return [
-            'datum'=>fake()->date(),
             'vreme'=>fake()->dateTime(),
             'ukupnaCena'=>fake()->numberBetween(1800,5000),
             'trajanje'=>fake()->numberBetween(30,120)
