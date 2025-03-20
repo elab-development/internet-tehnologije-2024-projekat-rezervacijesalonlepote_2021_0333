@@ -29,7 +29,7 @@ class TipUslugePolicy
      */
     public function create(User $user): bool
     {
-        return $user->role==='radica' || $user->role==='admin';
+        return $user->role==='radnik' || $user->role==='admin';
     }
 
     /**
@@ -37,7 +37,7 @@ class TipUslugePolicy
      */
     public function update(User $user, TipUsluge $tipUsluge): bool
     {
-        return $user->role==='radica' || $user->role==='admin';
+        return $user->role==='radnik' || $user->role==='admin';
     }
 
     /**

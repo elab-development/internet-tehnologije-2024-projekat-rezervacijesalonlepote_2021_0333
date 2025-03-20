@@ -21,6 +21,7 @@ class UslugaSeeder extends Seeder
         forEach($termini as $termin){
             for($i = 0; $i < 2;$i++){
                 Usluga::create([
+                    'redniBroj'=>$i,
                     'termin_id'=>$termin->id,
                     'tip_usluge_id'=>fake()->randomElement($tipoviUsluga)->id
                 ]);

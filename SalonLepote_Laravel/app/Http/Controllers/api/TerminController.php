@@ -46,16 +46,15 @@ class TerminController extends Controller
         if (Gate::allows('create', Termin::class)) {
 
             $validatedData = $request->validate([
-                'datum' => 'required|date',
-                'vreme' => 'required|time',
+                'vreme' => 'required|date',
                 'ukupnaCena' => 'required|integer',
                 'trajanje' => 'required|integer',
                 'radnica_id' => 'required|integer|exists:radnicas,id',
-                'klijent_id' => 'required|integer|exists:klijent,id'
+                'klijent_id' => 'required|integer|exists:klijents,id'
             ]);
 
-            $radnica = Radnica::create($validatedData);
-            return new TerminResource($this->loadRelationships($radnica));
+            $termin = Termin::create($validatedData);
+            return new TerminResource($this->loadRelationships($termin));
         } else {
             return response()->json([
                 'message' => 'Pristup odbijen za kreiranje termina'
@@ -87,7 +86,6 @@ class TerminController extends Controller
         if (Gate::allows('update', $termin)) {
 
             $validatedData = $request->validate([
-                'datum' => 'required|date',
                 'vreme' => 'required|time'
             ]);
 

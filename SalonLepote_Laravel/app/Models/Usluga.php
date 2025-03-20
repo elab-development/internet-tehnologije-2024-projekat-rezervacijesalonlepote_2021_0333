@@ -12,6 +12,7 @@ class Usluga extends Model
     /** @use HasFactory<\Database\Factories\UslugaFactory> */
     use HasFactory;
     protected $guarded=[];
+    protected $primaryKey = "redniBroj";
 
     public function termin(): BelongsTo
     {

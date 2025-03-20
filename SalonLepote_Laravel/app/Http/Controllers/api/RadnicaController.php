@@ -94,19 +94,17 @@ class RadnicaController extends Controller
     public function update(Request $request, string $id)
     {
         $radnica = Radnica::findOrFail($id);
-        $user = Radnica::findOrFail($radnica->user_id);
+        $user = User::findOrFail($radnica->user_id);
         if (Gate::allows('update', $radnica)) {
  
             $validatedUser = $request->validate([
                 'name' => 'required|string|max:20',
-                'email' => 'required|email|unique:users,email,' . $user->id,
                 'password' => 'nullable|string|min:8'
             ]);
  
  
             $user->update([
                 'name' => $validatedUser['name'],
-                'email' => $validatedUser['email'],
                 'password' => $validatedUser['password'] ? bcrypt($validatedUser['password']) : $user->password,
             ]);
  
@@ -125,10 +123,12 @@ class RadnicaController extends Controller
     public function destroy(string $id)
     {
         $radnica = Radnica::findOrFail($id);
+        $user = User::findOrFail($radnica->user_id);
         if (Gate::allows('delete', $radnica)) {
  
             $radnica->delete();
- 
+            $user->delete();
+
             return response()->json([
                 'message' => 'Radnica je uspešno obrisana'
             ], 200);

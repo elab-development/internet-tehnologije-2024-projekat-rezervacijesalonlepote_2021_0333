@@ -14,7 +14,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('uslugas', function (Blueprint $table) {
-            $table->unsignedInteger('redniBroj', true);
+            $table->unsignedInteger('redniBroj');
             $table->foreignIdFor(Termin::class)->constrained();
             $table->foreignIdFor(TipUsluge::class)->constrained();
             $table->primary(['redniBroj', 'termin_id']);
