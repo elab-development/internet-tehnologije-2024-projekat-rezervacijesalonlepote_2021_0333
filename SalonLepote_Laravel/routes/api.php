@@ -9,9 +9,9 @@ use App\Http\Controllers\api\TipUslugeController;
 use App\Http\Controllers\api\UslugaController;
 use App\Http\Controllers\AuthController;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+// Route::get('/user', function (Request $request) {
+//     return $request->user();
+// })->middleware('auth:sanctum');
 
 // Route::post('/',function(){
 //     return redirect('/login');
