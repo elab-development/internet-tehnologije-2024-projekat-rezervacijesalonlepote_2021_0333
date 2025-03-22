@@ -1,0 +1,693 @@
+*{
+    margin: 0;
+    padding: 0;
+    --deep-pink: #fb6f92;
+    --regular-pink: #ff8fab;
+    --soft-pink: #ffb3c6;
+    --light-pink: #ffc2d1;
+    --baby-pink: #ffe5ec;
+    --dark: #590d22;
+
+    --title-font: "Poppins", sans-serif;
+    --text-font: "Roboto", sans-serif;
+}
+
+.title{
+    font-family: var(--title-font);
+}
+ 
+.text{
+    font-family: var(--text-font);
+}
+ 
+.footerSection{
+    color: white;
+    background-color: var(--deep-pink);
+}
+ 
+.social{
+    color: white;
+    transition: transform 250ms;
+    display: inline-block;
+}
+ 
+.social:hover{
+    transform: translateY(-2px);
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    max-width: 1100px;
+    max-height: 700px;
+    margin: 100px auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.wrapper i {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 44px;
+    width: 44px;
+    color: #805B10;
+    font-size: 1.15rem;
+    cursor: pointer;
+    text-align: center;
+    line-height: 44px;
+    background: #FAE6E7;
+    border-radius: 50%;
+    z-index: 10;
+}
+
+.wrapper i:hover {
+    background: #fff;
+}
+
+.wrapper #left {
+    left: 10px;
+}
+
+.wrapper #right {
+    right: 10px;
+}
+
+.carousel {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    white-space: nowrap;
+}
+
+.carousel img {
+    height: 340px;
+    object-fit: cover;
+    user-select: none;
+    width: 300px;
+    transition: transform 0.3s ease;
+}
+
+.carousel img:hover {
+    transform: scale(1.1);
+}
+
+/* Uklanjanje scrollbar-a */
+.carousel::-webkit-scrollbar {
+    display: none;
+}
+
+ 
+.copyrightSection{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.8rem;
+    font-family: var(--text-font);
+    background-color: var(--regular-pink);
+    color: white;
+}
+
+
+.topBanner {
+    min-height: 7%;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: 90px;
+}
+
+.topBannerImage{
+    background-image: url("../images/Studio.jpg");
+    min-height: 500px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 10px;
+}
+ 
+.topBannerContainer{
+    width: 100%;
+    height: 100%;
+}
+ 
+.topBannerText{
+    padding: 10px;
+    text-align: justify;
+    color: var(--dark);
+    font-size: 1.5rem;
+}
+
+.topBannerText>h1{
+    color: var(--deep-pink);
+    padding-bottom: 10px;
+}
+ 
+.navBackground {
+    -webkit-transition: background-color 400ms linear;
+    -moz-transition: background-color 400ms linear;
+    -o-transition: background-color 400ms linear;
+    transition: background-color 400ms linear;
+    background-color: var(--baby-pink) !important;
+}
+ 
+.navBackgroundScroll {
+    -webkit-transition: background-color 400ms linear;
+    -moz-transition: background-color 400ms linear;
+    -o-transition: background-color 400ms linear;
+    transition: background-color 400ms linear;
+    background-color: var(--light-pink) !important;
+}
+ 
+.navItem{
+    color: white !important;
+    font-family: var(--text-font);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 0 !important;
+}
+ 
+.navItem:hover{
+    color: var(--deep-pink) !important;
+    font-family: var(--text-font);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 0 5px;
+}
+ 
+.navItemScroll{
+    font-family: var(--text-font);
+    text-decoration: none !important;
+    color: var(--baby-pink) !important;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 0 !important;
+}
+ 
+.navItemScroll:hover{
+    font-family: var(--text-font);
+    text-decoration: none !important;
+    color: var(--light-pink) !important;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 0 5px;
+}
+ 
+.activeItem{
+    color:var(--deep-pink);
+}
+ 
+.navTitle{
+    font-family: var(--title-font);
+    font-weight: 700;
+    font-size: 20px;
+    padding-right: 10px;
+    color:var(--deep-pink) !important;
+}
+ 
+.navTitle:hover{
+    font-family: var(--title-font);
+    font-weight: 700;
+    font-size: 20px;
+    padding-right: 10px;
+    color:var(--soft-pink) !important;
+}
+ 
+.navTitleScroll{
+    font-family: var(--title-font);
+    font-weight: 700;
+    font-size: 20px;
+    padding-right: 10px;
+    color:var(--deep-pink) !important;
+}
+ 
+.navTitleScroll:hover{
+    font-family: var(--title-font);
+    font-weight: 700;
+    font-size: 20px;
+    padding-right: 10px;
+    color:var(--regular-pink) !important;
+}
+ 
+.serviceCard{
+    margin: 2em;
+    box-shadow: 0 13px 25px -5px;
+    transition: all ease 200ms;
+    height: 480px;
+}
+ 
+ 
+.serviceCard:hover{
+    margin: 30px 15px;
+    transform: scale(1.02);
+    box-shadow: 0 13px 35px -5px;
+    cursor: pointer;
+}
+ 
+.serviceCard>img{
+    width: 100%;
+    height: 40%;
+    object-fit: cover;
+}
+ 
+.serviceCard>h3{
+    padding-top: 5px;
+    color: var(--deep-pink);
+}
+ 
+.serviceCard>p{
+    text-align: justify;
+    padding: 10px;
+}
+ 
+.summaryBanner{
+    min-height: 300px;
+    background-image: url("../images/summary.jpg");
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    color: var(--light-pink);
+}
+ 
+.summaryBannerOverlay{
+    background-color: rgba(0, 0, 0, 0.7);
+    min-height: 300px;
+    width: 100%;
+    left:0;
+    position: absolute;
+}
+ 
+.loginForm{
+    font-family: var(--title-font);
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    margin: 0 auto;
+    font-weight: 700;
+    background:  linear-gradient(135deg, var(--light-pink), var(--soft-pink));
+    padding: 20px;
+    box-shadow: 0px 0px 10px black;
+}
+ 
+.loginForm>input{
+    border:none;
+    padding: 5px;
+    border-radius: 20px;
+    margin: 5px 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+ 
+.loginForm>input:focus{
+    border:none;
+    padding: 5px;
+    border-radius: 20px;
+    margin: 5px 0;
+    box-shadow: 0 0 10px blue;
+    transform: scale(1.02);
+    outline: none;
+}
+ 
+ 
+.errorBox{
+    font-family: var(--text-font);
+    padding: 3px;
+    color: red;
+    font-weight: 400;
+}
+ 
+.mainBanner {
+    position: relative;
+    background-image: url("../images/doctor.jpg");
+    min-height: 100vh; /* Zauzima visinu celog viewporta */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Centriranje elemenata i vertikalno */
+    text-align: center;
+  }
+ 
+ 
+ 
+  .ustanoveContainer {
+    max-width: 800px;
+    min-width: 100%;
+    margin: 0 auto; /* Centrira ustanove unutar overlay-a */
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+ 
+ 
+.guestBackground{
+    background-image: url("../images/bg1.jpg");
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+ 
+.nameContainer{
+    background-color: rgba(0,0,0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+    color: var(--light-pink);
+    font-size: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px;
+}
+ 
+.formButton{
+    border: none;
+    border-radius: 20px;
+    padding: 5px;
+    color: white;
+    background-color: var(--deep-pink);
+}
+ 
+.formButton-active{
+    background-color: var(--regular-pink);
+}
+ 
+.formButton:hover{
+    border: none;
+    border-radius: 20px;
+    padding: 5px;
+    color: white;
+    background-color: var(--regular-pink);
+}
+ 
+.formButton:active{
+    border: none;
+    border-radius: 20px;
+    padding: 5px;
+    color: white;
+    background-color: var(--deep-pink);
+    transform: scale(1.02);
+}
+ 
+.pacijentPodaci{
+    font-size: 25px;
+    background-color: #22577a;
+    border-radius: 10px;
+    border: 2px solid white;
+    padding: 5px;
+    color: var(--light-pink);
+    margin: 50px;
+    min-width: 50%;
+}
+ 
+.pacijentInput{
+    border-radius: 10px;
+    border: 2px solid var(--soft-pink);
+    padding: 2px;
+}
+ 
+.editableInput{
+    background-color: #ffffff;
+    color: black;
+    border-radius: 10px;
+}
+ 
+.pregled{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border: 2px solid white;
+    border-radius: 10px;
+    margin: 10px;
+    align-items: center;
+    padding:20px;
+    gap: 20px;
+}
+ 
+.pregledOpis{
+    border: 2px solid white;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 5px;
+ 
+}
+ 
+.pregledStavka{
+    border: 2px solid white;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 5px;
+    background-color: var(--baby-pink);
+    color: white;
+}
+ 
+.custom-card {
+    background-color: rgba(0, 0, 0, 0.5);  /* svetla pozadina */
+    border-radius: 10px;         /* zaokruženi ivici */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* senka za karticu */
+    padding: 20px;
+    margin: 10px auto;
+    font-size: 20px;
+    width: 60%;
+    transition: transform 0.3s ease-in-out;
+    margin: 10px 0;
+    color: white;
+  }
+ 
+  .custom-card:hover {
+    transform: scale(1.05); /* povećanje kartice pri hover-u */
+  }
+ 
+  .pacijent-card{
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;         /* zaokruženi ivici */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* senka za karticu */
+    padding: 20px;
+    margin: 10px 0;
+    font-size: 20px;
+    width: 80%;
+    transition: transform 0.3s ease-in-out;
+    margin: 10px auto;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 10px;
+    cursor: pointer;
+    color: white;
+  }
+ 
+  .pacijent-card:hover {
+    transform: scale(1.05); /* povećanje kartice pri hover-u */
+  }
+ 
+  .kreirajKartonForma{
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: var(--deep-pink);
+    color: white;
+    padding: 20px;
+    margin: 30px;
+  }
+ 
+  .errorMessage{
+    color: red !important;
+  }
+ 
+.forme{
+    display: flex;
+    justify-content: space-evenly;
+    background:  linear-gradient(135deg, var(--light-pink), var(--soft-pink));
+    border-radius: 20px;
+    padding: 10px;
+    gap: 20px;
+    margin: auto;
+    margin-bottom: 50px;
+    width: 60%;
+}
+ 
+.formInput{
+    background-color: white;
+    border-radius: 10px;
+    font-family: var(--text-font);
+}
+ 
+.formInput:focus{
+    background-color: white;
+    border-color: #00b4d8;
+    box-shadow: 0 0 8px rgba(0, 180, 216, 0.5);
+}
+ 
+.formSelect{
+    background-color: white;
+    border-radius: 10px;
+    font-family: var(--text-font);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+ 
+.formSelect:focus{
+    background-color: white;
+    border-color: #00b4d8;
+    box-shadow: 0 0 8px rgba(0, 180, 216, 0.5);
+}
+ 
+.alert-message{
+    font-family: var(--title-font);
+    background-color: rgba(0, 0, 0, 0.5);  /* svetla pozadina */
+    color: var(--light-pink);
+    padding: 20px;
+    border-radius: 20px;
+   
+}
+ 
+.formGrid{
+    display: flex;
+    gap: 10px;
+}
+ 
+.formColumn{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    gap: 5px;
+}
+ 
+.formColumn>input{
+    border:none;
+    padding: 5px;
+    border-radius: 20px;
+    margin: 5px 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+ 
+.formColumn>input:focus{
+    border:none;
+    padding: 5px;
+    border-radius: 20px;
+    margin: 5px 0;
+    box-shadow: 0 0 10px blue;
+    transform: scale(1.02);
+    outline: none;
+}
+ 
+.formColumn>select{
+    background-color: white;
+    border-radius: 10px;
+    font-family: var(--text-font);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    padding: 5px;
+    outline: none;
+    border: none;
+}
+ 
+.kreirajPregledForma{
+    background-color: var(--deep-pink);
+    margin: 30px;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+ 
+.azurirajForma{
+    background-color:  var(--deep-pink);
+    padding: 10px;
+    border-radius: 10px;
+    margin: 20px;
+    min-width: 500px;
+}
+ 
+.readOnlyInput {
+    background-color: transparent;
+    border: none;
+    color: red;
+  }
+.nonEditableInput {
+    border: none !important;
+    background-color: transparent !important;
+    color: white !important;
+}
+ 
+.navItem:hover{
+    color: var(--regular-pink) !important;
+    font-family: var(--text-font);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 0 5px;
+}
+ 
+.navItemScroll{
+    font-family: var(--text-font);
+    text-decoration: none !important;
+    color: var(--dark) !important;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 0 !important;
+}
+ 
+.navItemScroll:hover{
+    font-family: var(--text-font);
+    text-decoration: none !important;
+    color: var(--deep-pink) !important;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 0 5px;
+}
+ 
+.activeItem{
+    color:var(--deep-pink);
+}
+ 
+.navTitle{
+    font-family: var(--title-font);
+    font-weight: 700;
+    font-size: 20px;
+    padding-right: 10px;
+    color:var(--regular-pink) !important;
+}
+ 
+.navTitle:hover{
+    font-family: var(--title-font);
+    font-weight: 700;
+    font-size: 20px;
+    padding-right: 10px;
+    color:var(--soft-pink) !important;
+}
+ 
+.navTitleScroll{
+    font-family: var(--title-font);
+    font-weight: 700;
+    font-size: 20px;
+    padding-right: 10px;
+    color:var(--deep-pink) !important;
+}
+ 
+.navTitleScroll:hover{
+    font-family: var(--title-font);
+    font-weight: 700;
+    font-size: 20px;
+    padding-right: 10px;
+    color:var(--regular-pink) !important;
+}
+ 
