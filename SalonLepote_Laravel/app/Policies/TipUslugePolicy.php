@@ -29,7 +29,7 @@ class TipUslugePolicy
      */
     public function create(User $user): bool
     {
-        return $user->role==='radnik' || $user->role==='admin';
+        return $user->role==='admin';
     }
 
     /**

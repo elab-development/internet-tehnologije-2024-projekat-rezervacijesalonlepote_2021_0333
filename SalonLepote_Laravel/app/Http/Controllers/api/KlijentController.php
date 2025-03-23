@@ -46,7 +46,7 @@ class KlijentController extends Controller
      */
     public function show(string $id)
     {
-        $klijent = Klijent::where('id', $id)->firstOrFail();
+        $klijent = Klijent::where('user_id', $id)->firstOrFail();
         if (Gate::allows('view', $klijent)) {
             return new KlijentResource($this->loadRelationships($klijent)); 
         } else {

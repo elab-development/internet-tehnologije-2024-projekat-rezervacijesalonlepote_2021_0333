@@ -43,45 +43,55 @@ export default function NavBar() {
           <Nav className="ms-auto gap-3 align-items-center">
             {!token ? (
               <>
+             
+                <NavLink to="/tipusluge" className={`${navBarItem} px-3 py-2 rounded`}>
+                  Usluge
+                </NavLink>
                 <NavLink to="/login" className={`${navBarItem} px-3 py-2 rounded`}>
                   Prijavi se
                 </NavLink>
                 <NavLink to="/register" className={`${navBarItem} px-3 py-2 rounded`}>
                   Registruj se
                 </NavLink>
+
               </>
             ) : (
               <>
-                {user.role === "radnik" && (
+              {<h1>Dobrodosli {user.name}</h1>}
+                {user.role === "radnik"(
                   <>
-                    <NavLink to={`/pacijent/${user.id}`} className={`${navBarItem} px-3 py-2 rounded`}>
+                    <NavLink to={`/radnice/${user.id}`} className={`${navBarItem} px-3 py-2 rounded`}>
                       Moji podaci
                     </NavLink>
-                    <NavLink to={`/karton/${user.id}`} className={`${navBarItem} px-3 py-2 rounded`}>
-                      Karton
+                    <NavLink to={`/termini`} className={`${navBarItem} px-3 py-2 rounded`}>
+                      Termini
+                    </NavLink>
+                    <NavLink to={`/check-availability`} className={`${navBarItem} px-3 py-2 rounded`}>
+                      Zakazi termin
                     </NavLink>
                   </>
                 )}
+                
                 {user.role === "klijent" && (
                   <>
-                    <NavLink to="/pacijenti" className={`${navBarItem} px-3 py-2 rounded`}>
-                      Pacijenti
+                    <NavLink to={`/klijent/${user.id}`} className={`${navBarItem} px-3 py-2 rounded`}>
+                      Moji podaci
                     </NavLink>
-                    <NavLink to="/kreiraj-karton" className={`${navBarItem} px-3 py-2 rounded`}>
-                      Kreiraj karton
+                    <NavLink to={`/termini`} className={`${navBarItem} px-3 py-2 rounded`}>
+                      Termini
+                    </NavLink>
+                    <NavLink to={`/check-availability`} className={`${navBarItem} px-3 py-2 rounded`}>
+                      Zakazi termin
                     </NavLink>
                   </>
                 )}
                 {user.role === "admin" && (
                   <>
-                    <NavLink to="/doktori" className={`${navBarItem} px-3 py-2 rounded`}>
-                      Doktori
+                    <NavLink to="/radnice" className={`${navBarItem} px-3 py-2 rounded`}>
+                      Radnice
                     </NavLink>
-                    <NavLink to="/sestre" className={`${navBarItem} px-3 py-2 rounded`}>
-                      Sestre
-                    </NavLink>
-                    <NavLink to="/ustanove" className={`${navBarItem} px-3 py-2 rounded`}>
-                      Ustanove
+                    <NavLink to="/tipUsluga" className={`${navBarItem} px-3 py-2 rounded`}>
+                      Tip usluga
                     </NavLink>
                   </>
                 )}

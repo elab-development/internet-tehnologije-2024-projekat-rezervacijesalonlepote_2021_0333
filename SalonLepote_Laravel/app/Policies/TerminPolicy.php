@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Klijent;
 use App\Models\Termin;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
@@ -13,7 +14,7 @@ class TerminPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->role==='radnik';
+        return $user->role === 'radnik';
     }
 
     /**
@@ -21,7 +22,8 @@ class TerminPolicy
      */
     public function view(User $user, Termin $termin): bool
     {
-        return $user->role==='radnik' || $user->id==$termin->klijent_id;
+        $klijent = Klijent::findOrFail($termin->klijent_id);
+        return $user->role === 'radnik' || $user->id == $klijent->user_id;
     }
 
     /**
@@ -29,7 +31,7 @@ class TerminPolicy
      */
     public function create(User $user): bool
     {
-        return $user->role==='radnik' || $user->role==='klijent';
+        return $user->role === 'radnik' || $user->role === 'klijent';
     }
 
     /**
@@ -37,7 +39,7 @@ class TerminPolicy
      */
     public function update(User $user, Termin $termin): bool
     {
-        return $user->role==='radnik';
+        return $user->role === 'radnik';
     }
 
     /**
@@ -45,7 +47,7 @@ class TerminPolicy
      */
     public function delete(User $user, Termin $termin): bool
     {
-        return $user->role==='radnik';
+        return $user->role === 'radnik';
     }
 
     /**

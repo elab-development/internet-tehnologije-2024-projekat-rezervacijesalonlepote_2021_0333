@@ -77,7 +77,7 @@ class RadnicaController extends Controller
      */
     public function show(string $id)
     {
-        $radnica = Radnica::where('id', $id)->firstOrFail();
+        $radnica = Radnica::where('user_id', $id)->firstOrFail();
         if(Gate::allows('view',$radnica)){
             return new RadnicaResource($radnica);
         }else{

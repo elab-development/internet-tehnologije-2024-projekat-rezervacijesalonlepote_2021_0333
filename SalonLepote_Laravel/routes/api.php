@@ -18,16 +18,16 @@ use App\Http\Controllers\AuthController;
 // });
 
 
-Route::middleware(['auth:sanctum'])->group(function(){
+Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('klijenti', KlijentController::class);
     Route::apiResource('radnice', RadnicaController::class);
     Route::apiResource('usluge', UslugaController::class);
-    Route::apiResource('tipUsluga', TipUslugeController::class);
     Route::apiResource('termini', TerminController::class);
-    Route::post('/logout',[AuthController::class,'logout']);
+    Route::post('/logout', [AuthController::class, 'logout']);
 
-    Route::delete('/usluge/{redniBroj}/{termin_id}',[UslugaController::class, 'destroy']);
+    Route::delete('/usluge/{redniBroj}/{termin_id}', [UslugaController::class, 'destroy']);
 });
 
-Route::post('/login',[AuthController::class,'login']);
-Route::post('/register',[AuthController::class,'register']);
+Route::post('/login', [AuthController::class, 'login']);
+    Route::apiResource('tipUsluga', TipUslugeController::class);
+    Route::post('/register', [AuthController::class, 'register']);
