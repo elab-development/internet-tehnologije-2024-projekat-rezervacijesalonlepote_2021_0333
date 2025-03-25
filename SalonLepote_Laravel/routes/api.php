@@ -29,4 +29,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 });
 
 Route::post('/login', [AuthController::class, 'login']);
+    Route::apiResource('tipUsluga', TipUslugeController::class);
     Route::post('/register', [AuthController::class, 'register']);
+    Route::get('/klijentForUser/{id}',[KlijentController::class, 'getKlijentForUser']);
+Route::get('/radnicaForUser/{id}',[RadnicaController::class, 'getRadnicaForUser']);

@@ -61,16 +61,19 @@ class KlijentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $klijent = Klijent::where('id', $id)->firstOrFail();
-        $user = User::firstOrFail($klijent->user_id);
+        $user = User::findOrFail($id);
+        $klijent = Klijent::where('user_id', $id)->firstOrFail();
         if (Gate::allows('update', $klijent)) {
-            $validatedData=$request->validate([
+            $validatedDataUser=$request->validate([
                 'name' => 'required|string|max:20',
-                'password' => 'nullable|string|min:8',
-                'telefon'=>'required|string'
+                'email' => 'required|email'
+            ]);
+            $validatedDataKlijent = $request->validate([
+                'telefon' => "required"
             ]);
 
-            $klijent->update($validatedData);
+            $user->update($validatedDataUser);
+            $klijent->update($validatedDataKlijent);
             return response()->json([
                 'message' => 'Uspesno azuriranje klijenta'
             ], 200);
@@ -102,5 +105,10 @@ class KlijentController extends Controller
                 'message' => 'Pristup odbijen za brisanje klijenata'
             ], 403);
         }
+    }
+
+    public function getKlijentForUser(string $id){
+        $klijent = Klijent::where("user_id",$id)->firstOrFail();
+        return $klijent;
     }
 }

@@ -9,7 +9,6 @@ createRoot(document.getElementById('root')).render(
  
     <ContextProvider>
       <RouterProvider router={router}></RouterProvider>
-
     </ContextProvider>
  
 )

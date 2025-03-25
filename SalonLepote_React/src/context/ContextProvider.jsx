@@ -9,11 +9,12 @@ const StateContext = createContext({
 
 export const ContextProvider = ({ children }) => {
     const storedUser = typeof window !== 'undefined' ? {
-        name: localStorage.getItem('USER_NAME'),
-        email: localStorage.getItem('USER_EMAIL'),
-        role: localStorage.getItem('USER_ROLE'),
-        id: localStorage.getItem('USER_ID'),
+        name: localStorage.getItem('USER_NAME') || '',
+        email: localStorage.getItem('USER_EMAIL') || '',
+        role: localStorage.getItem('USER_ROLE') || '',
+        id: localStorage.getItem('USER_ID') || '',
     } : {};
+    
     const [user, setUserState] = useState(storedUser);
     const [token, setTokenState] = useState(typeof window !== 'undefined' ? localStorage.getItem('ACCESS_TOKEN') : null);
     useEffect(() => {

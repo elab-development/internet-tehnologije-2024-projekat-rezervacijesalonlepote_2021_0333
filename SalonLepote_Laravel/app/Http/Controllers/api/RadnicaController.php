@@ -79,7 +79,7 @@ class RadnicaController extends Controller
     {
         $radnica = Radnica::where('user_id', $id)->firstOrFail();
         if(Gate::allows('view',$radnica)){
-            return new RadnicaResource($radnica);
+            return new RadnicaResource($this->loadRelationships($radnica));
         }else{
             return response()->json([
                 'message' => 'Pristup odbijen za pregled radnice'
@@ -93,19 +93,17 @@ class RadnicaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $radnica = Radnica::findOrFail($id);
-        $user = User::findOrFail($radnica->user_id);
+        $user = User::findOrFail($id);
+        $radnica = Radnica::where("user_id",$id)->firstOrFail();
         if (Gate::allows('update', $radnica)) {
  
             $validatedUser = $request->validate([
                 'name' => 'required|string|max:20',
-                'password' => 'nullable|string|min:8'
             ]);
  
  
             $user->update([
                 'name' => $validatedUser['name'],
-                'password' => $validatedUser['password'] ? bcrypt($validatedUser['password']) : $user->password,
             ]);
  
             return response()->json([
@@ -135,5 +133,10 @@ class RadnicaController extends Controller
         } else {
             return response()->json(['message' => 'Pristup odbijen za brisanje radnice'], 403);
         }
+    }
+
+    public function getRadnicaForUser(string $id){
+        $radnica = Radnica::where("user_id",$id)->firstOrFail();
+        return $radnica;
     }
 }

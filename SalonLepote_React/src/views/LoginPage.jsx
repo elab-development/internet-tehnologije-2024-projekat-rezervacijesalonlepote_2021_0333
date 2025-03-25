@@ -25,6 +25,7 @@ export default function LoginPage() {
       const response = await axiosClient.post("/login", { email, password });
       setUser(response.data);
       setToken(response.data.token);
+      navigate("/");
     } catch (err) {
       setError("Neuspešna prijava, proverite podatke");
     }
