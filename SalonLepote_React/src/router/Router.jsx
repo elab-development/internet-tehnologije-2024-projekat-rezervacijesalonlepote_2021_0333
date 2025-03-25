@@ -5,7 +5,9 @@ import Pocetna from "../views/Pocetna.jsx"
 import LoginPage from '../views/LoginPage.jsx'
 import RegisterPage from '../views/RegisterPage.jsx'
 import UslugePage from '../views/UslugePage.jsx'
-
+import MojiPodaciPage from '../views/MojiPodaciPage.jsx'
+import ZakaziTerminPage from '../views/ZakaziTerminPage.jsx'
+import MojiTerminiPage from "../views/MojiTerminiPage.jsx"
 
 const router = createBrowserRouter([
     {
@@ -13,29 +15,41 @@ const router = createBrowserRouter([
         element: <DefaultLayout></DefaultLayout>,
         children: [
             {
-                path: '/pocetna',
+                index:true,
                 element: <Pocetna></Pocetna>
             },
+            {
+                path: "/mojiPodaci",
+                element: <MojiPodaciPage></MojiPodaciPage>
+            },
+            {
+                path: "/zakaziTermin",
+                element: <ZakaziTerminPage></ZakaziTerminPage>
+            },
+            {
+                path: "/mojiTermini",
+                element: <MojiTerminiPage></MojiTerminiPage>
+            }
         ]
     },
     {
-        path: '/',
+        path: '/auth',
         element: <GuestLayout></GuestLayout>,
         children: [
             {
-                path: '/pocetna',
+                path: 'pocetna',
                 element: <Pocetna></Pocetna>
             },
             {
-                path: '/login',
+                path: 'login',
                 element:<LoginPage></LoginPage>
             },
             {
-                path: '/register',
+                path: 'register',
                 element:<RegisterPage></RegisterPage>
             },
             {
-                path: '/tipusluge',
+                path: 'tipusluge',
                 element:<UslugePage></UslugePage>
             }
         ]

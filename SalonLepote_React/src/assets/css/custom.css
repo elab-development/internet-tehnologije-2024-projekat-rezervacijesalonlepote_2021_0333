@@ -120,11 +120,10 @@
 }
 
 .topBannerImage {
-    background-image: url("../images/Studio.jpg");
-    min-height: 500px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    height: 500px;
+    width: 100%;
+    display: block;
+    object-fit: cover;
     margin: 10px;
 }
 
@@ -145,12 +144,18 @@
     padding-bottom: 10px;
 }
 
+.navAuthName{
+    color: var(--dark);
+    font-size:1.5rem;
+    padding-right: 100px;
+}
+
 .navBackground {
     -webkit-transition: background-color 400ms linear;
     -moz-transition: background-color 400ms linear;
     -o-transition: background-color 400ms linear;
     transition: background-color 400ms linear;
-    background-color: var(--baby-pink) !important;
+    background-color: var(--light-pink) !important;
 }
 
 .navBackgroundScroll {
@@ -158,7 +163,7 @@
     -moz-transition: background-color 400ms linear;
     -o-transition: background-color 400ms linear;
     transition: background-color 400ms linear;
-    background-color: var(--light-pink) !important;
+    background-color: var(--baby-pink) !important;
 }
 
 .navItem {
@@ -182,7 +187,7 @@
 .navItemScroll {
     font-family: var(--text-font);
     text-decoration: none !important;
-    color: var(--baby-pink) !important;
+    color: var(--deep-pink) !important;
     font-weight: 700;
     font-size: 16px;
     padding: 0 !important;
@@ -191,7 +196,7 @@
 .navItemScroll:hover {
     font-family: var(--text-font);
     text-decoration: none !important;
-    color: var(--light-pink) !important;
+    color: var(--dark) !important;
     font-weight: 700;
     font-size: 16px;
     padding: 0 5px;
@@ -202,11 +207,11 @@
 }
 
 .navTitle {
+    color: var(--deep-pink) !important;
     font-family: var(--title-font);
     font-weight: 700;
     font-size: 20px;
     padding-right: 10px;
-    color: var(--deep-pink) !important;
 }
 
 .navTitle:hover {
@@ -214,7 +219,7 @@
     font-weight: 700;
     font-size: 20px;
     padding-right: 10px;
-    color: var(--soft-pink) !important;
+    color: var(--dark) !important;
 }
 
 .navTitleScroll {
@@ -230,7 +235,7 @@
     font-weight: 700;
     font-size: 20px;
     padding-right: 10px;
-    color: var(--regular-pink) !important;
+    color: var(--dark) !important;
 }
 
 .serviceCard {
@@ -324,7 +329,7 @@
 
 .mainBanner {
     position: relative;
-    background-image: url("../images/doctor.jpg");
+    background-image: url("../images/Pozadina.jpg");
     min-height: 100vh;
     /* Zauzima visinu celog viewporta */
     background-attachment: fixed;
@@ -640,68 +645,7 @@
     color: white !important;
 }
 
-.navItem:hover {
-    color: var(--regular-pink) !important;
-    font-family: var(--text-font);
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 16px;
-    padding: 0 5px;
-}
 
-.navItemScroll {
-    font-family: var(--text-font);
-    text-decoration: none !important;
-    color: var(--dark) !important;
-    font-weight: 700;
-    font-size: 16px;
-    padding: 0 !important;
-}
-
-.navItemScroll:hover {
-    font-family: var(--text-font);
-    text-decoration: none !important;
-    color: var(--deep-pink) !important;
-    font-weight: 700;
-    font-size: 16px;
-    padding: 0 5px;
-}
-
-.activeItem {
-    color: var(--deep-pink);
-}
-
-.navTitle {
-    font-family: var(--title-font);
-    font-weight: 700;
-    font-size: 20px;
-    padding-right: 10px;
-    color: var(--regular-pink) !important;
-}
-
-.navTitle:hover {
-    font-family: var(--title-font);
-    font-weight: 700;
-    font-size: 20px;
-    padding-right: 10px;
-    color: var(--soft-pink) !important;
-}
-
-.navTitleScroll {
-    font-family: var(--title-font);
-    font-weight: 700;
-    font-size: 20px;
-    padding-right: 10px;
-    color: var(--deep-pink) !important;
-}
-
-.navTitleScroll:hover {
-    font-family: var(--title-font);
-    font-weight: 700;
-    font-size: 20px;
-    padding-right: 10px;
-    color: var(--regular-pink) !important;
-}
 
 
 

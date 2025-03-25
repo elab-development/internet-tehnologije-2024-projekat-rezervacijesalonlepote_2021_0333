@@ -8,7 +8,6 @@ const UslugaCard = ({ usluga }) => {
 
   return (
     <div className="usluga-card">
-      {token!=null? <input type="check-box"></input> :"" }
       <div className="usluga-naziv">{usluga.naziv}</div>
       <div className="usluga-opis">{usluga.opis}</div>
       <div className="usluga-trajanje">{usluga.trajanje} min</div>

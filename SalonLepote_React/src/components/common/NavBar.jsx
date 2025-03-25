@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useStateContext } from "../../context/ContextProvider";
 import "../../assets/css/custom.css";
 
@@ -9,6 +9,7 @@ export default function NavBar() {
   const [navBarItem, setNavBarItem] = useState("navItem");
   const [navBarTitle, setNavBarTitle] = useState("navTitle");
   const { token, user, setUser, setToken } = useStateContext();
+  const navigate = useNavigate();
 
   const onScroll = () => {
     if (window.scrollY > 50) {
@@ -23,6 +24,7 @@ export default function NavBar() {
   };
 
   const handleLogout = () => {
+    navigate("/auth/pocetna");
     setUser(null);
     setToken(null);
   };
@@ -33,54 +35,46 @@ export default function NavBar() {
   }, [user]);
 
   return (
-    <Navbar collapseOnSelect expand="lg" fixed="top" className={`py-3 shadow ${navBarBackground}`}>
+    <Navbar collapseOnSelect expand="lg" fixed="top" className={`py-1 shadow ${navBarBackground}`}>
       <Container>
         <Navbar.Brand href="/" className={`fw-bold fs-4 ${navBarTitle}`}>
           NP Nails
+          {
+            token && (
+              <>
+                {<h1 className="navAuthName">Korisnik: {user.name}</h1>}
+              </>
+            )
+          }
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ms-auto gap-3 align-items-center">
             {!token ? (
               <>
-             
-                <NavLink to="/tipusluge" className={`${navBarItem} px-3 py-2 rounded`}>
+
+                <NavLink to="/auth/tipusluge" className={`${navBarItem} px-3 py-2 rounded`}>
                   Usluge
                 </NavLink>
-                <NavLink to="/login" className={`${navBarItem} px-3 py-2 rounded`}>
+                <NavLink to="/auth/login" className={`${navBarItem} px-3 py-2 rounded`}>
                   Prijavi se
                 </NavLink>
-                <NavLink to="/register" className={`${navBarItem} px-3 py-2 rounded`}>
+                <NavLink to="/auth/register" className={`${navBarItem} px-3 py-2 rounded`}>
                   Registruj se
                 </NavLink>
 
               </>
             ) : (
               <>
-              {<h1>Dobrodosli {user.name}</h1>}
-                {user.role === "radnik"(
+                {(user.role === "radnik" || user.role == "klijent") && (
                   <>
-                    <NavLink to={`/radnice/${user.id}`} className={`${navBarItem} px-3 py-2 rounded`}>
+                    <NavLink to={`/mojiPodaci`} className={`${navBarItem} px-3 py-2 rounded`}>
                       Moji podaci
                     </NavLink>
-                    <NavLink to={`/termini`} className={`${navBarItem} px-3 py-2 rounded`}>
-                      Termini
+                    <NavLink to={`/mojiTermini`} className={`${navBarItem} px-3 py-2 rounded`}>
+                      Moji termini
                     </NavLink>
-                    <NavLink to={`/check-availability`} className={`${navBarItem} px-3 py-2 rounded`}>
-                      Zakazi termin
-                    </NavLink>
-                  </>
-                )}
-                
-                {user.role === "klijent" && (
-                  <>
-                    <NavLink to={`/klijent/${user.id}`} className={`${navBarItem} px-3 py-2 rounded`}>
-                      Moji podaci
-                    </NavLink>
-                    <NavLink to={`/termini`} className={`${navBarItem} px-3 py-2 rounded`}>
-                      Termini
-                    </NavLink>
-                    <NavLink to={`/check-availability`} className={`${navBarItem} px-3 py-2 rounded`}>
+                    <NavLink to={`/zakaziTermin`} className={`${navBarItem} px-3 py-2 rounded`}>
                       Zakazi termin
                     </NavLink>
                   </>
