@@ -22,7 +22,9 @@ class UslugaController extends Controller
 
             $usluge = Usluga::query();
             $query = $this->loadRelationships($usluge);
-            return Usluga::collection($query->latest()->paginate());
+            return 
+            //Usluga::collection
+            ($query->latest()->paginate());
         } else {
             return response()->json([
                 'message' => 'Pristup odbijen za pregled usluga'

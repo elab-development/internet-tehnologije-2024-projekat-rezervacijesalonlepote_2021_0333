@@ -56,7 +56,7 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:8'
         ]);
-        $user = User::create([...$validatedUser,'role'=>'pacijent']);
+        $user = User::create([...$validatedUser,'role'=>'klijent']);
         $validatedPacijent = $request->validate([      
             'telefon' => 'required|string',
         ]);

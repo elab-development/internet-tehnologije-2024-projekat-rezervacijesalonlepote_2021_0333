@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 class RadnicaController extends Controller
 {
     use CanLoadRelationShips;
-    private $relations = ['user'];
+    private $relations = ['user', 'termins', 'termins.usluga'];
     /**
      * Display a listing of the resource.
      */

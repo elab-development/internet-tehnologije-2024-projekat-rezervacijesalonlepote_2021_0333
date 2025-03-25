@@ -13,7 +13,7 @@ use App\Http\Resources\TerminResource;
 class TerminController extends Controller
 {
     use CanLoadRelationShips;
-    private $relations = ['radnica','radnica.user', 'klijent'];
+    private $relations = ['radnica','radnica.user', 'klijent', 'uslugas', 'uslugas.tipusluge', 'klijent.user'];
     /**
      * Display a listing of the resource.
      */

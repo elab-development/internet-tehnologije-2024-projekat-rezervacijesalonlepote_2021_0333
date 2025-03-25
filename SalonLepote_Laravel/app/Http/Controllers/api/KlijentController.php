@@ -17,7 +17,7 @@ class KlijentController extends Controller
      * Display a listing of the resource.
      */
     use CanLoadRelationShips;
-    private array $relations=['user'];
+    private array $relations=['user', 'termins', 'termins.usluga'];
     public function index(Request $request)
 
     {

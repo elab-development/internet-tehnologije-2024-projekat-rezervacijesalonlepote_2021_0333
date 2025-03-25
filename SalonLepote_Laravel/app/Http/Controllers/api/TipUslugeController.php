@@ -15,7 +15,7 @@ class TipUslugeController extends Controller
      */
     public function index(Request $request)
     {
-        // if (Gate::allows('viewAny', TipUsluge::class)) {
+         if (Gate::allows('viewAny', TipUsluge::class)) {
             $naziv = $request->input('naziv');
             $cenaOd = $request->input('cenaOd');
             $cenaDo = $request->input('cenaDo');
@@ -26,11 +26,11 @@ class TipUslugeController extends Controller
                 ->when($cenaOd, fn($query) => $query->withCenaOd($cenaOd))
                 ->when($cenaDo,fn($query)=> $query->withCenaDo($cenaDo));
             return $tipovi->latest()->paginate();
-        // } else {
-            // return response()->json([
-            //     'message' => 'Pristup odbijen za pregled tipova usluga'
-            // ], 403);
-        // }
+        } else {
+            return response()->json([
+                'message' => 'Pristup odbijen za pregled tipova usluga'
+            ], 403);
+        }
     }
 
     /**

@@ -2,17 +2,18 @@
 
 namespace App\Models;
 
+use App\Models\Usluga;
 use App\Models\Klijent;
 use App\Models\Radnica;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Query\Builder as QueryBuilder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Query\Builder as QueryBuilder;
 
 class Termin extends Model
 {
-    /** @use HasFactory<\Database\Factories\TerminFactory> */
     use HasFactory;
     protected $guarded=[];
 
@@ -24,6 +25,11 @@ class Termin extends Model
     public function radnica():BelongsTo
     {
         return $this->belongsTo(Radnica::class, 'radnica_id', 'id');
+    }
+
+    public function uslugas():HasMany
+    {
+        return $this->HasMany(Usluga::class);
     }
 
     public function scopeWithDatum(Builder $query, string $datum):Builder|QueryBuilder{
