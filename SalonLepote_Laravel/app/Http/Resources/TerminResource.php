@@ -16,6 +16,7 @@ class TerminResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
             'trajanje' => $this->trajanje,
             'vreme' => $this->vreme,
             'ukupnaCena' => $this->ukupnaCena,

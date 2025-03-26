@@ -21,7 +21,7 @@ class TerminController extends Controller
     public function index(Request $request)
     {
         if (Gate::allows('viewAny', Termin::class)) {
-            $datum = $request->input('datum');
+            $datum = $request->input('vreme');
             $radnica = $request->input('radnica');
             $klijent = $request->input('klijent');
             $termini = Termin::query()
