@@ -144,9 +144,9 @@
     padding-bottom: 10px;
 }
 
-.navAuthName{
+.navAuthName {
     color: var(--dark);
-    font-size:1.5rem;
+    font-size: 1.5rem;
     padding-right: 100px;
 }
 
@@ -723,3 +723,60 @@
 }
 
 
+.termin {
+    background-color: var(--light-pink);
+    color: var(--dark);
+    border: 2px solid var(--dark);
+    border-radius: 10px;
+    box-shadow: 0 0 5px 5px var(--baby-pink);
+    padding: 10px;
+    display: flex;
+    gap: 30px;
+    justify-content: space-evenly;
+    min-width: 50%;
+}
+
+.sviTermini {
+    background-image: url("../images/Pozadina.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100vw;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.termin-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.key {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.value {
+    color: #555;
+    font-size: 14px;
+}
+
+.termin-row:last-child {
+    margin-bottom: 0;
+}
+
+
+.bez-termina{
+    color: var(--dark);
+    border: 2px solid var(--dark);
+    border-radius: 5px;
+    padding: 5px;
+    background-color: var(--deep-pink);
+}

@@ -17,17 +17,17 @@ class KlijentController extends Controller
      * Display a listing of the resource.
      */
     use CanLoadRelationShips;
-    private array $relations=['user', 'termins', 'termins.usluga'];
+    private array $relations = ['user', 'termins', 'termins.usluga'];
     public function index(Request $request)
 
     {
         if (Gate::allows('viewAny', Klijent::class)) {
             $ime = $request->input('ime');
-            $klijenti = Klijent::whereHas('user', function(Builder $query) use ($ime){
-                $query->where('name','like','%'.$ime.'%');
+            $klijenti = Klijent::whereHas('user', function (Builder $query) use ($ime) {
+                $query->where('name', 'like', '%' . $ime . '%');
             });
             // $klijenti = Klijent::query()->when($ime, fn($query, $ime) => $query->withIme($ime));
-            $query=$this->loadRelationships($klijenti);
+            $query = $this->loadRelationships($klijenti);
             return KlijentResource::collection($query->latest()->paginate());
         } else {
             return response()->json([
@@ -48,7 +48,7 @@ class KlijentController extends Controller
     {
         $klijent = Klijent::where('user_id', $id)->firstOrFail();
         if (Gate::allows('view', $klijent)) {
-            return new KlijentResource($this->loadRelationships($klijent)); 
+            return new KlijentResource($this->loadRelationships($klijent));
         } else {
             return response()->json([
                 'message' => 'Pristup odbijen za pregled klijenata'
@@ -64,7 +64,7 @@ class KlijentController extends Controller
         $user = User::findOrFail($id);
         $klijent = Klijent::where('user_id', $id)->firstOrFail();
         if (Gate::allows('update', $klijent)) {
-            $validatedDataUser=$request->validate([
+            $validatedDataUser = $request->validate([
                 'name' => 'required|string|max:20',
                 'email' => 'required|email'
             ]);
@@ -91,9 +91,9 @@ class KlijentController extends Controller
     {
         $klijent = Klijent::where('id', $id)->firstOrFail();
         $user = User::findOrFail($klijent->user_id);
-        
+
         if (Gate::allows('delete', $klijent)) {
-            
+
 
             $klijent->delete();
             $user->delete();
@@ -107,8 +107,10 @@ class KlijentController extends Controller
         }
     }
 
-    public function getKlijentForUser(string $id){
-        $klijent = Klijent::where("user_id",$id)->firstOrFail();
-        return $klijent;
+    public function getKlijentForUser(string $id)
+    {
+        $klijent = Klijent::where("user_id", $id)->firstOrFail();
+        $query = $this->loadRelationships($klijent);
+        return new KlijentResource($query);
     }
 }

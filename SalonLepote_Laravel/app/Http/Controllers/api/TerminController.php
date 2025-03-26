@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api;
 
+use App\Models\User;
 use App\Models\Termin;
 use App\Models\Radnica;
 use Illuminate\Http\Request;

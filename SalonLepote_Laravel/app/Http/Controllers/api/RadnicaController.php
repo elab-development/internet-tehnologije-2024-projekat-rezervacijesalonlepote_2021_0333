@@ -137,6 +137,7 @@ class RadnicaController extends Controller
 
     public function getRadnicaForUser(string $id){
         $radnica = Radnica::where("user_id",$id)->firstOrFail();
-        return $radnica;
+        $query = $this->loadRelationships($radnica);
+        return new RadnicaResource($query);
     }
 }

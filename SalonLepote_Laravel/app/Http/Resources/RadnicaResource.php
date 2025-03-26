@@ -15,7 +15,7 @@ class RadnicaResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'radnica_id'=> $this->id
+            'id'=> $this->id
             ,'user' => new UserResource($this->whenLoaded('user'))];
     }
 }
