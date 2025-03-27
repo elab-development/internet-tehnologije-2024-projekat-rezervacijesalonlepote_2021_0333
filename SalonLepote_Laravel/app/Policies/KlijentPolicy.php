@@ -13,7 +13,7 @@ class KlijentPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->role==='radnik';
+        return true;
     }
 
     /**

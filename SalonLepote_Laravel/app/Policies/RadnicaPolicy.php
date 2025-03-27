@@ -13,7 +13,7 @@ class RadnicaPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->role==='admin' || $user->role==='radnik';
+        return true;
     }
 
     /**

@@ -33,7 +33,7 @@ class Termin extends Model
     }
 
     public function scopeWithDatum(Builder $query, string $datum):Builder|QueryBuilder{
-        return $query->where('datum',$datum);
+        return $query->where('vreme','LIKE','%'.$datum.'%');
     }
 
     public function scopeWithRadnica(Builder $query, int $radnica):Builder|QueryBuilder{

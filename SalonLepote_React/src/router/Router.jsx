@@ -8,6 +8,8 @@ import UslugePage from '../views/UslugePage.jsx'
 import MojiPodaciPage from '../views/MojiPodaciPage.jsx'
 import ZakaziTerminPage from '../views/ZakaziTerminPage.jsx'
 import MojiTerminiPage from "../views/MojiTerminiPage.jsx"
+import RadnicePage from "../views/RadnicePage.jsx";
+import DodajRadnicuPage from "../views/DodajRadnicuPage.jsx"
 
 const router = createBrowserRouter([
     {
@@ -29,6 +31,14 @@ const router = createBrowserRouter([
             {
                 path: "/mojiTermini",
                 element: <MojiTerminiPage></MojiTerminiPage>
+            },
+            {
+                path: "/radnice",
+                element: <RadnicePage></RadnicePage>
+            },
+            {
+                path: "/dodajRadnicu",
+                element: <DodajRadnicuPage></DodajRadnicuPage>
             }
         ]
     },

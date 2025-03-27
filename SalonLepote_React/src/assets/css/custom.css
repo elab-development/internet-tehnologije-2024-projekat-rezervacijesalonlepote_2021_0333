@@ -720,6 +720,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding-top: 100px;
 }
 
 
@@ -780,3 +781,88 @@
     padding: 5px;
     background-color: var(--deep-pink);
 }
+
+.rezervacija-container {
+    background-image: url("../images/Pozadina.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+  
+  .termini-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .termin-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .termin-item.zauzet {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  
+  .termin-item.slobodan {
+    background-color: #d4edda;
+    color: #155724;
+  }
+
+  /* Osnovni stil za checkbox */
+input[type="checkbox"] {
+    -webkit-appearance: none; /* Onemogućava podrazumevani stil u Webkit pretraživačima */
+    -moz-appearance: none; /* Onemogućava podrazumevani stil u Firefox-u */
+    appearance: none; /* Onemogućava podrazumevani stil u ostalim pretraživačima */
+    width: 20px; /* Postavljamo širinu checkbox-a */
+    height: 20px; /* Postavljamo visinu checkbox-a */
+    border: 2px solid var(--deep-pink); /* Boja ivice */
+    border-radius: 5px; /* Zaokruženi uglovi */
+    background-color: #fff; /* Bela pozadina */
+    cursor: pointer; /* Kursor postavljamo kao pointer za lakši klik */
+    position: relative; /* Da bismo postavili unutrašnji znak */
+    transition: background-color 0.2s ease, border-color 0.2s ease; /* Animacija za pozadinu i ivicu */
+  }
+  
+  /* Stil za označen checkbox */
+  input[type="checkbox"]:checked {
+    background-color: var(--deep-pink); /* Pozadina kada je checkbox označen */
+    border-color: var(--dark); /* Boja ivice kada je označen */
+  }
+  
+  /* Unutrašnji tick (čekiran znak) */
+  input[type="checkbox"]:checked::before {
+    content: '\2713'; /* Unicode znak za tick (✔) */
+    font-size: 16px; /* Veličina teksta */
+    color: #fff; /* Boja teksta (bela) */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centriranje znaka u checkbox-u */
+  }
+  
+  /* Stil za checkbox kada se nalazi u hover stanju */
+  input[type="checkbox"]:hover {
+    border-color: var(--light-pink); /* Boja ivice kada se prelazi mišem */
+  }
+  
+  /* Opcioni label za stilizovane checkbox-e */
+  input[type="checkbox"]:focus {
+    outline: none; /* Uklanja podrazumevani outline */
+    box-shadow: 0 0 5px white; /* Dodaje sjaj oko checkbox-a */
+  }
+  

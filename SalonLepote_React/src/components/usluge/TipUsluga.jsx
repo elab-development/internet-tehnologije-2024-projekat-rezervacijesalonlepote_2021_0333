@@ -4,7 +4,7 @@ import UslugaCard from "./UslugeCard";
 import axiosClient from "../../axios/axios-client";
 import { useStateContext } from "../../context/ContextProvider";
 
-const UslugaPage = () => {
+export default function TipUsluga () {
     const [usluge, setUsluge] = useState([]); // Držimo usluge u stanju
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -39,15 +39,6 @@ const UslugaPage = () => {
         navigate("/auth/login");
     };
 
-    // Funkcija za dodavanje/uklanjanje usluge iz liste selected
-    const handleCheckboxChange = (index) => {
-        setSelected((prevSelected) =>
-            prevSelected.includes(index)
-                ? prevSelected.filter((i) => i !== index) // Ako je već izabran, ukloni ga
-                : [...prevSelected, index] // Ako nije, dodaj ga
-        );
-        console.log(selected);
-    };
 
     return (
         <div className="usluge-container">
@@ -87,4 +78,3 @@ const UslugaPage = () => {
     );
 };
 
-export default UslugaPage;
