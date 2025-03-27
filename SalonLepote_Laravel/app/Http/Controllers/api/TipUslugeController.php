@@ -33,7 +33,7 @@ class TipUslugeController extends Controller
      */
     public function store(Request $request)
     {
-        if (Gate::allows('create', TipUsluge::class)) {
+       // if (Gate::allows('create', TipUsluge::class)) {
 
             $validatedData = $request->validate([
                 'naziv' => 'required|string',
@@ -44,11 +44,11 @@ class TipUslugeController extends Controller
 
             $tip = TipUsluge::create($validatedData);
             return new TipUslugeResource($tip);
-        } else {
-            return response()->json([
-                'message' => 'Pristup odbijen za kreiranje tipa usluge'
-            ], 403);
-        }
+            // } else {
+            //     return response()->json([
+            //         'message' => 'Pristup odbijen za kreiranje tipa usluge'
+            //     ], 403);
+            // }
     }
 
     /**

@@ -6,10 +6,10 @@ use App\Models\User;
 use App\Models\Klijent;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\KlijentResource as ResourcesKlijentResource;
+
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
-use App\Http\Resources\Resource\KlijentResource;
+use App\Http\Resources\KlijentResource;
 
 
 class AuthController extends Controller
@@ -57,11 +57,11 @@ class AuthController extends Controller
             'password' => 'required|string|min:8'
         ]);
         $user = User::create([...$validatedUser,'role'=>'klijent']);
-        $validatedPacijent = $request->validate([      
+        $validatedKlijet = $request->validate([      
             'telefon' => 'required|string',
         ]);
-        $klijent = Klijent::create([...$validatedPacijent,'user_id'=>$user->id]);
-        return new ResourcesKlijentResource($klijent);
+        $klijent = Klijent::create([...$validatedKlijet,'user_id'=>$user->id]);
+        return new KlijentResource($klijent);
     }
  
 }

@@ -57,8 +57,8 @@ export default function LoginPage() {
  
           <button type="submit" className="formButton">Prijava</button>
           <div>
-            <p className="pt-2">Nemaš nalog? <Link to="/register">Registruj se</Link></p>
-            <p>Nazad na početnu? <Link to="/pocetna">Odustani</Link></p>
+            <p className="pt-2">Nemaš nalog? <Link to="/auth/register" className="link1">Registruj se</Link></p>
+            <p>Nazad na početnu? <Link to="/auth/pocetna" className="link1">Odustani</Link></p>
           </div>
         </form>
       </Container>

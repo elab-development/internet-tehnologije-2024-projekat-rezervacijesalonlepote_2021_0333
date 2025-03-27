@@ -15,6 +15,7 @@ export default function Registracija() {
     const [password, setPassword] = useState("");
     const [telefon, setTelefon] = useState("");
     const [error, setError] = useState("");
+    const navigate=useNavigate();
 
 
 
@@ -60,9 +61,10 @@ export default function Registracija() {
                 password,
                 telefon
             });
-            setUser(response.data);
-            navigate("/login"); // Redirect to home after successful registration
+            //setUser(response.data);
+            navigate("/auth/login"); // Redirect to home after successful registration
         } catch (err) {
+            console.log(err);
             setError("Neuspešna registracija, proverite podatke");
         }
     };
@@ -130,9 +132,10 @@ export default function Registracija() {
                     <button className="formButton" type="submit">Registracija</button>
                     <div>
                         <p className="pt-2">
-                            Imaš nalog? <Link className="text-primary" to="/login">Prijavi se</Link>
-                            <p className="pt-2">Nazad na početnu? <Link to="/pocetna">Odustani</Link></p>
+                            Imaš nalog? <Link className="link1" to="/auth/login">Prijavi se</Link>
                         </p>
+                            <p className="pt-2">Nazad na početnu? <Link to="/auth/pocetna" className="link1">Odustani</Link></p>
+
                     </div>
                 </form>
             </Container>

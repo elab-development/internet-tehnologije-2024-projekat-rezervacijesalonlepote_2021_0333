@@ -82,7 +82,7 @@ export default function MojiPodaciBanner() {
         <Fragment>
 
             <Container fluid className="mainBanner pt-5">
-                <div className="d-flex flex-column p-4 pacijentPodaci">
+                <div className="d-flex flex-column p-4 azurirajForma">
                     <h1 className="text-center mb-4 title">Lični podaci</h1>
                     {loading ? (
                         <p>Učitavanje podataka...</p>
@@ -142,17 +142,17 @@ export default function MojiPodaciBanner() {
 
                     {isEditing ? (
                         <div className="d-flex justify-content-center gap-3">
-                            <Button className="mt-3 title" variant="success" onClick={handleSubmit} style={{ borderRadius: "30px" }}>
+                            <button className="btn1" onClick={handleSubmit} style={{ borderRadius: "30px" }}>
                                 Sačuvaj izmene
-                            </Button>
-                            <Button className="mt-3 title" variant="secondary" onClick={() => setIsEditing(false)} style={{ borderRadius: "30px" }}>
+                            </button>
+                            <button className="btn1" onClick={() => setIsEditing(false)} style={{ borderRadius: "30px" }}>
                                 Odustani
-                            </Button>
+                            </button>
                         </div>
                     ) : (
-                        <Button className="mt-3 align-self-center title" variant="primary" onClick={() => setIsEditing(true)} style={{ borderRadius: "30px" }}>
+                        <button className="btn1" onClick={() => setIsEditing(true)} style={{ borderRadius: "30px" }}>
                             Omogući izmenu
-                        </Button>
+                        </button>
                     )}
                 </div>
             </Container>

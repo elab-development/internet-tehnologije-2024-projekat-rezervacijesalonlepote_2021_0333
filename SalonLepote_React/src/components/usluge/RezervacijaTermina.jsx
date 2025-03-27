@@ -16,6 +16,7 @@ export default function Rezervacija() {
   const [klijenti, setKlijenti] = useState([]);
   const { token, user } = useStateContext(); // user dolazi iz ContextProvider
 
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -140,6 +141,7 @@ export default function Rezervacija() {
       );
 
       alert("Uspešno ste rezervisali termin!");
+      navigate("/mojiTermini");
     } catch (error) {
       console.error("Greška pri rezervaciji:", error);
       alert("Došlo je do greške pri rezervaciji.");
@@ -172,7 +174,7 @@ export default function Rezervacija() {
           {/* Select za radnice ili klijente */}
           {user.role === "klijent" && (
             <div className="form-group mt-3">
-              <label>Izaberite radnicu:</label>
+             
               <select
                 value={selectedUser}
                 onChange={handleUserChange}
@@ -192,7 +194,7 @@ export default function Rezervacija() {
             </div>
           )}
 
-          {user.role === "radnica" && (
+          {user.role === "radnik" && (
             <div className="form-group mt-3">
               <label>Izaberite klijenta:</label>
               <select

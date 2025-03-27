@@ -84,7 +84,7 @@ export default function NavBar() {
                     <NavLink to="/radnice" className={`${navBarItem} px-3 py-2 rounded`}>
                       Radnice
                     </NavLink>
-                    <NavLink to="/tipUsluga" className={`${navBarItem} px-3 py-2 rounded`}>
+                    <NavLink to="/uslugeadmin" className={`${navBarItem} px-3 py-2 rounded`}>
                       Tip usluga
                     </NavLink>
                   </>

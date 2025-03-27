@@ -10,6 +10,7 @@ use App\trait\CanLoadRelationShips;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Resources\TerminResource;
+use App\Models\Usluga;
 
 class TerminController extends Controller
 {
@@ -104,6 +105,10 @@ class TerminController extends Controller
      */
     public function destroy(string $id)
     {
+        $usluge=Usluga::where('termin_id', $id)->get();
+        foreach($usluge as $usluga){
+            Usluga::where('redniBroj',$usluga->redniBroj)->delete();
+        }
         $termin = Termin::findOrFail($id);
         if (Gate::allows('delete', $termin)) {
             $termin->delete();

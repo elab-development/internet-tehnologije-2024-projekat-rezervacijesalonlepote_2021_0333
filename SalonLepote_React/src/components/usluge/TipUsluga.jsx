@@ -57,7 +57,7 @@ export default function TipUsluga () {
 
             {!token && (
                 <div>
-                    <button className="btn btn-primary" onClick={handleClick}>
+                    <button className="btn1" onClick={handleClick}>
                         Napravite rezervaciju
                     </button>
                 </div>

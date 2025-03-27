@@ -51,6 +51,17 @@ export default function Termini() {
 
     };
 
+    const handleDelete = (param) => {
+        try {
+            const response = axiosClient.delete(`/termini/${param}`);
+            window.alert("Uspesno obrisan termin!");
+            fetchTermini();
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+
 
     // Pozovi fetchTermini kada su klijent ili radnica postavljeni
     useEffect(() => {
@@ -62,7 +73,7 @@ export default function Termini() {
     return (
         <Fragment>
             <div className="sviTermini">
-            {termini.length==0 && (
+                {termini.length == 0 && (
                     <div className="bez-termina">
                         <p>Nemate termina!</p>
                     </div>
@@ -115,10 +126,22 @@ export default function Termini() {
                                 <p className="key">Kontakt:</p>
                                 <p className="value">{value.klijent.telefon}</p>
                             </div>
+
+                            {/* Dugme za brisanje */}
+                            <div className="termin-row">
+                                <button
+                                    className="btn1"
+                                    onClick={() => handleDelete(value.id)}
+                                >
+                                    Obriši termin
+                                </button>
+                            </div>
                         </div>
                     ))
                 )}
-                
+
+
+
             </div>
         </Fragment>
 
