@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+
 import service1 from "../../assets/images/Manikir.jpg";
 import service2 from "../../assets/images/Pedikir.jpg";
 import service3 from "../../assets/images/MedPedikir.jpg";

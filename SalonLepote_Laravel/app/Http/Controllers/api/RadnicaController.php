@@ -25,7 +25,7 @@ class RadnicaController extends Controller
                 $query->where('name','like','%'.$ime.'%');
             });
             $query=$this->loadRelationships($radnice);
-            return RadnicaResource::collection($query->latest()->paginate());
+            return RadnicaResource::collection($query->latest()->paginate(3));
         }else{
             return response()->json([
                 'message' => 'Pristup odbijen za pregled radnica'

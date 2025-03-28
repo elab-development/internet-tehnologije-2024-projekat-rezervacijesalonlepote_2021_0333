@@ -880,5 +880,67 @@ input[type="checkbox"]:focus {
 
 
 .link1{
+    color: var(--dark) !important;
+}
+.link1>a{
     color: var(--dark);
 }
+
+.comments-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    background: #f9f9f9;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  h2 {
+    margin-bottom: 10px;
+  }
+  
+  .comment {
+    background: white;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    text-align: center;
+    min-height: 120px;
+  }
+  
+  .comment h4 {
+    margin: 0;
+    color: var(--deep-pink);
+  }
+  
+  .comment p {
+    margin: 5px 0 0;
+    font-size: 14px;
+  }
+  
+  .slick-prev, .slick-next {
+    font-size: 20px;
+    color: var(--deep-pink);
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+  }
+  
+  .slick-prev {
+    left: -40px;
+  }
+  
+  .slick-next {
+    right: -40px;
+  }
+  
+  .slick-prev:hover, .slick-next:hover {
+    color: #0056b3;
+  }
+  

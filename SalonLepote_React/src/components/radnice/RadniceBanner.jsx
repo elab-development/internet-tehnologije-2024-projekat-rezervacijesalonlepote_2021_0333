@@ -5,20 +5,30 @@ import axiosClient from "./../../axios/axios-client";
 export default function RadniceBanner() {
   const [radnice, setRadnice] = useState([]);
   const [filterIme, setFilterIme] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  // Paginacija
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   // Učitavanje liste radnica
   useEffect(() => {
     fetchRadnice();
-  }, []);
+  }, [currentPage]); // Poziva API kada se stranica menja
 
   const fetchRadnice = async (ime = "") => {
+    setLoading(true); // Aktivira se prilikom svakog učitavanja
     try {
       const response = await axiosClient.get(
-        `/radnice?include=user${ime ? `&ime=${ime}` : ""}`
+        `/radnice?page=${currentPage}&include=user${ime ? `&ime=${ime}` : ""}`
       );
-      setRadnice(response.data.data);
+      console.log(response.data);
+      setTotalPages(response.data.meta.last_page); // Postavljamo ukupan broj stranica
+      setRadnice(response.data.data); // Postavljamo podatke o radnicama
     } catch (error) {
       console.error("Došlo je do greške prilikom učitavanja radnica.", error);
+    } finally {
+      setLoading(false); // Deaktivira loading stanje
     }
   };
 
@@ -27,11 +37,13 @@ export default function RadniceBanner() {
   };
 
   const handleFilterSubmit = () => {
+    setCurrentPage(1); // Resetujemo na prvu stranicu prilikom filtriranja
     fetchRadnice(filterIme);
   };
 
   const obrisiFilter = () => {
     setFilterIme("");
+    setCurrentPage(1); // Resetujemo na prvu stranicu prilikom brisanja filtera
     fetchRadnice();
   };
 
@@ -43,6 +55,18 @@ export default function RadniceBanner() {
       } catch (error) {
         console.error("Došlo je do greške prilikom brisanja radnice.", error);
       }
+    }
+  };
+
+  const nextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
     }
   };
 
@@ -73,16 +97,20 @@ export default function RadniceBanner() {
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>#</th>
               <th>Ime</th>
               <th>Akcije</th>
             </tr>
           </thead>
           <tbody>
-            {radnice.length > 0 ? (
+            {loading ? (
+              <tr>
+                <td colSpan="3" className="text-center">
+                  Učitavanje...
+                </td>
+              </tr>
+            ) : radnice.length > 0 ? (
               radnice.map((radnica, index) => (
                 <tr key={radnica.id}>
-                  <td>{index + 1}</td>
                   <td>{radnica.user?.name || "Nepoznato"}</td>
                   <td>
                     <Button
@@ -103,6 +131,27 @@ export default function RadniceBanner() {
             )}
           </tbody>
         </Table>
+
+        {/* Paginacija */}
+        <div className="pagination mt-4 d-flex justify-content-center">
+          <Button
+            variant="secondary"
+            onClick={prevPage}
+            disabled={currentPage === 1}
+          >
+            Prethodna
+          </Button>
+          <span className="mx-3">
+            {currentPage} od {totalPages}
+          </span>
+          <Button
+            variant="secondary"
+            onClick={nextPage}
+            disabled={currentPage === totalPages}
+          >
+            Sledeća
+          </Button>
+        </div>
       </Container>
     </Fragment>
   );

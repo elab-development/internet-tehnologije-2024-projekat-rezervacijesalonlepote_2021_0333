@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import UslugaCard from "./UslugeCard";
 import axiosClient from "../../axios/axios-client";
 import { useStateContext } from "../../context/ContextProvider";
+import Breadcrumb from 'react-bootstrap/Breadcrumb';
 
-export default function TipUsluga () {
+
+export default function TipUsluga() {
     const [usluge, setUsluge] = useState([]); // Držimo usluge u stanju
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -42,6 +44,10 @@ export default function TipUsluga () {
 
     return (
         <div className="usluge-container">
+            <Breadcrumb>
+                <Breadcrumb.Item href="/auth/pocetna" className="link1">Početna</Breadcrumb.Item>
+                <Breadcrumb.Item active>Usluge</Breadcrumb.Item>
+            </Breadcrumb>
             <h1 className="title">Naša ponuda usluga</h1>
             <div className="usluge-list">
                 {usluge && usluge.length > 0 ? (
