@@ -4,13 +4,16 @@ namespace App\Http\Controllers\api;
 
 use App\Models\User;
 use App\Models\Termin;
+use App\Models\Usluga;
+use App\Models\Klijent;
 use App\Models\Radnica;
 use Illuminate\Http\Request;
 use App\trait\CanLoadRelationShips;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ReservationConfirmation;
 use App\Http\Resources\TerminResource;
-use App\Models\Usluga;
 
 class TerminController extends Controller
 {
@@ -56,6 +59,13 @@ class TerminController extends Controller
             ]);
 
             $termin = Termin::create($validatedData);
+
+            $klijent=Klijent::where('id', $validatedData['klijent_id']);
+            Mail::to($klijent->email)->send(new ReservationConfirmation([
+                'vreme' => $termin->vreme, 
+                'ukupnaCena' => $termin->ukupnaCena, 
+            ]));
+
             return new TerminResource($this->loadRelationships($termin));
         } else {
             return response()->json([

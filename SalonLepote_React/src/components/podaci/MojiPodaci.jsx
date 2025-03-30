@@ -6,14 +6,13 @@ import axiosClient from "../../axios/axios-client";
 
 export default function MojiPodaciBanner() {
     const { id } = useParams();
-    const { user } = useStateContext(); // Dohvatanje ulogovanog korisnika iz konteksta
+    const { user } = useStateContext();
     const [korisnik, setKorisnik] = useState({});
     const [loading, setLoading] = useState(true);
     const [isEditing, setIsEditing] = useState(false);
     const [errors, setErrors] = useState({});
 
     useEffect(() => {
-        // Dohvati podatke o korisniku sa dodatnim informacijama (uključuje telefon)
         const fetchData = async () => {
             try {
 
@@ -58,15 +57,12 @@ export default function MojiPodaciBanner() {
         if (!validateData()) return;
     
         try {
-            // Priprema endpointa na osnovu uloge
             const updateEndpoint = user.role === "klijent" ? `klijenti/${user.id}` : `radnice/${user.id}`;
     
-            // Priprema podataka – ako je radnica, uklanjamo telefon
             const podaciZaSlanje = user.role === "radnik" 
-                ? { name: korisnik.name, email: korisnik.email } // Bez telefona
-                : korisnik; // Ako je klijent, šaljemo sve podatke
+                ? { name: korisnik.name, email: korisnik.email } 
+                : korisnik; 
     
-            // Slanje ažuriranih podataka na server
             await axiosClient.put(`/${updateEndpoint}`, podaciZaSlanje);
     
             alert("Podaci su uspešno izmenjeni!");

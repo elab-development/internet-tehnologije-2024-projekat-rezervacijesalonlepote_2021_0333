@@ -7,12 +7,12 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb';
 
 
 export default function TipUsluga() {
-    const [usluge, setUsluge] = useState([]); // Držimo usluge u stanju
+    const [usluge, setUsluge] = useState([]); 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const { token } = useStateContext();
     const navigate = useNavigate();
-    const [selected, setSelected] = useState([]); // Čuva indekse odabranih usluga
+    const [selected, setSelected] = useState([]); 
 
     useEffect(() => {
         const fetchUsluge = async () => {

@@ -11,10 +11,10 @@ export default function Rezervacija() {
   const [usluge, setUsluge] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]);
   const [selectedUsluge, setSelectedUsluge] = useState([]);
-  const [selectedUser, setSelectedUser] = useState(null); // Za radnicu ili klijenta
+  const [selectedUser, setSelectedUser] = useState(null);
   const [radnice, setRadnice] = useState([]);
   const [klijenti, setKlijenti] = useState([]);
-  const { token, user } = useStateContext(); // user dolazi iz ContextProvider
+  const { token, user } = useStateContext();
 
 
   const navigate = useNavigate();
@@ -43,7 +43,7 @@ export default function Rezervacija() {
 
   useEffect(() => {
     generisiDostupneTermine();
-  }, [zauzetiTermini, selectedDate, selectedUsluge]);
+  }, [zauzetiTermini, selectedDate, selectedUsluge, selectedUser]);
 
   const generisiDostupneTermine = () => {
     const termini = [];
@@ -62,10 +62,10 @@ export default function Rezervacija() {
       const isZauzet = zauzetiTermini.some((t) => {
         const zauzetPocetak = new Date(t.vreme);
         const zauzetKraj = new Date(zauzetPocetak.getTime() + t.trajanje * 60000);
-        return (terminPocetak < zauzetKraj && terminKraj > zauzetPocetak); // Proveravamo da li se preklapaju
+        return (terminPocetak < zauzetKraj && terminKraj > zauzetPocetak && t.radnica_id === selectedUser);
       });
 
-      // Samo slobodni termini koji mogu da prime sve usluge
+
       if (!isZauzet) {
         termini.push({ vreme: `${hour}:00`, zauzet: isZauzet });
       }
@@ -80,9 +80,9 @@ export default function Rezervacija() {
     );
   };
 
-  // Odabir radnice ili klijenta na osnovu user.role
+
   const handleUserChange = (event) => {
-    setSelectedUser(parseInt(event.target.value, 10)); // Pretvori string u broj sa bazom 10
+    setSelectedUser(parseInt(event.target.value, 10));
   };
 
   const handleRezervisi = async (vreme) => {
@@ -106,7 +106,7 @@ export default function Rezervacija() {
     const korisnikId = response.data.data.id;
 
     try {
-      // Računanje ukupne cene i trajanja
+
       const ukupnaCena = selectedUsluge.reduce((total, uslugaId) => {
         const usluga = usluge.find((u) => u.id === uslugaId);
         return total + usluga.cena;
@@ -117,23 +117,21 @@ export default function Rezervacija() {
         return total + usluga.trajanje;
       }, 0);
 
-      // Kreiranje novog termina
       const response = await axiosClient.post("/termini", {
-        vreme: selectedDate+" "+vreme+":00",
+        vreme: selectedDate + " " + vreme + ":00",
         ukupnaCena,
         trajanje: ukupnoTrajanje,
-        radnica_id: user.role === "klijent" ? selectedUser : korisnikId, // Ako je klijent, izaberi radnicu, inače uzmi user id
-        klijent_id: user.role === "radnica" ? selectedUser : korisnikId, // Ako je radnica, izaberi klijenta, inače uzmi user id
+        radnica_id: user.role === "klijent" ? selectedUser : korisnikId,
+        klijent_id: user.role === "radnica" ? selectedUser : korisnikId,
       });
 
-      const terminId = response.data.data.id; // Dobijamo termin_id iz odgovora
+      const terminId = response.data.data.id;
 
-      // Upisivanje usluga u tabelu usluga
       await Promise.all(
         selectedUsluge.map((uslugaId, index) => {
           const usluga = usluge.find((u) => u.id === uslugaId);
           return axiosClient.post("/usluge", {
-            redniBroj: index + 1, // Inkrementujemo redni broj
+            redniBroj: index + 1,
             termin_id: terminId,
             tip_usluge_id: uslugaId,
           });
@@ -153,7 +151,50 @@ export default function Rezervacija() {
       <h1 className="title">Rezervacija termina</h1>
 
       <div className="row">
-        {/* Leva strana za usluge */}
+        {user.role === "klijent" && (
+          <div className="form-group mt-3 mb-5">
+
+            <select
+              value={selectedUser}
+              onChange={handleUserChange}
+              className="form-control"
+            >
+              <option value="">Izaberite radnicu</option>
+              {radnice && radnice.length > 0 ? (
+                radnice.map((radnica) => (
+                  <option key={radnica.id} value={radnica.id}>
+                    {radnica.user.name}
+                  </option>
+                ))
+              ) : (
+                <option value="">Nema dostupnih radnica</option>
+              )}
+            </select>
+          </div>
+        )}
+
+        {user.role === "radnik" && (
+          <div className="form-group mt-3 mb-5">
+            <label>Izaberite klijenta:</label>
+            <select
+              value={selectedUser}
+              onChange={handleUserChange}
+              className="form-control"
+            >
+              <option value="">Izaberite klijenta</option>
+              {klijenti && klijenti.length > 0 ? (
+                klijenti.map((klijent) => (
+                  <option key={klijent.id} value={klijent.id}>
+                    {klijent.user.name}
+                  </option>
+                ))
+              ) : (
+                <option value="">Nema dostupnih klijenata</option>
+              )}
+            </select>
+          </div>
+        )}
+
         <div className="col-lg-6 col-md-6 col-sm-12">
           {token && (
             <div className="usluge-list">
@@ -171,60 +212,16 @@ export default function Rezervacija() {
             </div>
           )}
 
-          {/* Select za radnice ili klijente */}
-          {user.role === "klijent" && (
-            <div className="form-group mt-3">
-             
-              <select
-                value={selectedUser}
-                onChange={handleUserChange}
-                className="form-control"
-              >
-                <option value="">Izaberite radnicu</option>
-                {radnice && radnice.length > 0 ? (
-                  radnice.map((radnica) => (
-                    <option key={radnica.id} value={radnica.id}>
-                      {radnica.user.name}
-                    </option>
-                  ))
-                ) : (
-                  <option value="">Nema dostupnih radnica</option>
-                )}
-              </select>
-            </div>
-          )}
 
-          {user.role === "radnik" && (
-            <div className="form-group mt-3">
-              <label>Izaberite klijenta:</label>
-              <select
-                value={selectedUser}
-                onChange={handleUserChange}
-                className="form-control"
-              >
-                <option value="">Izaberite klijenta</option>
-                {klijenti && klijenti.length > 0 ? (
-                  klijenti.map((klijent) => (
-                    <option key={klijent.id} value={klijent.id}>
-                      {klijent.user.name}
-                    </option>
-                  ))
-                ) : (
-                  <option value="">Nema dostupnih klijenata</option>
-                )}
-              </select>
-            </div>
-          )}
         </div>
 
-        {/* Desna strana za datum i termine */}
         <div className="col-lg-6 col-md-6 col-sm-12">
           <input
             type="date"
             value={selectedDate}
             onChange={(e) => setSelectedDate(e.target.value)}
             className="form-control"
-            min={new Date().toISOString().split("T")[0]} // Onemogućava odabir prošlih datuma
+            min={new Date().toISOString().split("T")[0]}
           />
 
           <div className="termini-list mt-4">

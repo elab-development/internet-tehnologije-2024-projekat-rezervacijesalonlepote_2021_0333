@@ -14,7 +14,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
  
   const handleSubmit = async (e) => {
-    e.preventDefault(); //zabrana refresa stranice
+    e.preventDefault(); 
  
     if (!email || !password) {
       setError("Molimo popunite sva polja");

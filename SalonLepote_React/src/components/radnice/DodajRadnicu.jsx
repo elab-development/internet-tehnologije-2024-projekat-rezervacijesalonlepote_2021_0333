@@ -14,7 +14,6 @@ export default function DodajRadnicu() {
     setError("");
     setSuccess("");
 
-    // Provera da li su svi podaci uneti
     if (!name || !email || !password) {
       setError("Sva polja su obavezna!");
       return;
@@ -25,16 +24,15 @@ export default function DodajRadnicu() {
         name,
         email,
         password,
-        role: "radnica"
+       role: "radnik"
       });
 
-      // Ako je uspešno dodano, prikazujemo poruku o uspehu
+      
       setSuccess(response.data.message);
       setName("");
       setEmail("");
       setPassword("");
     } catch (error) {
-      // U slučaju greške, prikazujemo poruku o grešci
       setError(error.response.data.message);
       console.error(error.response.data.message);
     }
@@ -49,7 +47,7 @@ export default function DodajRadnicu() {
           {error && <Alert variant="danger">{error}</Alert>}
           {success && <Alert variant="success">{success}</Alert>}
 
-          {/* Polje za ime radnice */}
+         
           <Form.Group controlId="name" className="mb-3 text-light">
             <Form.Label>Ime radnice</Form.Label>
             <Form.Control
@@ -60,7 +58,7 @@ export default function DodajRadnicu() {
             />
           </Form.Group>
 
-          {/* Polje za email radnice */}
+          
           <Form.Group controlId="email" className="mb-3 text-light">
             <Form.Label>Email radnice</Form.Label>
             <Form.Control
@@ -71,7 +69,6 @@ export default function DodajRadnicu() {
             />
           </Form.Group>
 
-          {/* Polje za lozinku radnice */}
           <Form.Group controlId="password" className="mb-3 text-light">
             <Form.Label>Lozinka</Form.Label>
             <Form.Control
@@ -82,7 +79,6 @@ export default function DodajRadnicu() {
             />
           </Form.Group>
 
-          {/* Dugme za slanje forme */}
           <Button className="w-100" variant="primary" type="submit">
             Dodaj radnicu
           </Button>

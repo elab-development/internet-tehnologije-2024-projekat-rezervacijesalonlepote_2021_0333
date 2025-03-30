@@ -51,7 +51,7 @@ class RadnicaController extends Controller
                 'name' => $validatedUser['name'],
                 'email' => $validatedUser['email'],
                 'password' => bcrypt($validatedUser['password']), 
-                'role' => 'radnica', 
+                'role' => 'radnik', 
             ]);
  
 

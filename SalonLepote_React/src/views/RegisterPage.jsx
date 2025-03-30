@@ -2,7 +2,6 @@
 import { Fragment, useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useStateContext } from "../context/ContextProvider";
 import { useNavigate } from "react-router-dom";
 import axiosClient from "../axios/axios-client";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -50,7 +49,7 @@ export default function Registracija() {
 
 
         if (!telefonRegex.test(telefon)) {
-            setError("Telefon mora biti u formatu +381 xx xxx xxxx");
+            setError("Telefon mora biti u formatu +381 xxxxxxxxx");
             return;
         }
 
@@ -61,8 +60,7 @@ export default function Registracija() {
                 password,
                 telefon
             });
-            //setUser(response.data);
-            navigate("/auth/login"); // Redirect to home after successful registration
+            navigate("/auth/login"); on
         } catch (err) {
             console.log(err);
             setError("Neuspešna registracija, proverite podatke");

@@ -28,7 +28,7 @@ const Utisci = () => {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 3, // Prikazuje 3 komentara istovremeno
+    slidesToShow: 3, 
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
