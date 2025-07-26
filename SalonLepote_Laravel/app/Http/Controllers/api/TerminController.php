@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ReservationConfirmation;
 use App\Http\Resources\TerminResource;
+use App\Mail\PotvrdaRezervacije;
 
 class TerminController extends Controller
 {
@@ -60,11 +61,10 @@ class TerminController extends Controller
 
             $termin = Termin::create($validatedData);
 
-            $klijent=Klijent::where('id', $validatedData['klijent_id']);
-            Mail::to($klijent->email)->send(new ReservationConfirmation([
-                'vreme' => $termin->vreme, 
-                'ukupnaCena' => $termin->ukupnaCena, 
-            ]));
+            $klijent=Klijent::findOrFail($validatedData['klijent_id']);
+            
+            Mail::to($klijent->user->email)->send(new PotvrdaRezervacije($termin));
+
 
             return new TerminResource($this->loadRelationships($termin));
         } else {

@@ -18,6 +18,9 @@ class TipUsluge extends Model
     public function uslugas():HasMany{
         return $this->hasMany(Usluga::class,'tipusluge_id', 'id');
     }
+
+
+    
     public function scopeWithNaziv(Builder $query, string $naziv):Builder|QueryBuilder{
         return $query->where('naziv','like','%'.$naziv.'%');
     }

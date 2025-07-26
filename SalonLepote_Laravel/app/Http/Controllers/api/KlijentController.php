@@ -17,11 +17,11 @@ class KlijentController extends Controller
      * Display a listing of the resource.
      */
     use CanLoadRelationShips;
-    private array $relations = ['user', 'termins', 'termins.usluga'];
+    private array $relations = ['user', 'termins', 'termins.usluga']; //lazy loading
     public function index(Request $request)
-
     {
         if (Gate::allows('viewAny', Klijent::class)) {
+            
             $ime = $request->input('ime');
             $klijenti = Klijent::whereHas('user', function (Builder $query) use ($ime) {
                 $query->where('name', 'like', '%' . $ime . '%');

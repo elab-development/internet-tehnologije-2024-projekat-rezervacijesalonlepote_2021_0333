@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('uslugas', function (Blueprint $table) {
             $table->unsignedInteger('redniBroj');
-            $table->foreignIdFor(Termin::class)->constrained();
+            $table->foreignIdFor(Termin::class)->constrained(); //termin_id
             $table->foreignIdFor(TipUsluge::class)->constrained();
             $table->primary(['redniBroj', 'termin_id']);
             $table->timestamps();

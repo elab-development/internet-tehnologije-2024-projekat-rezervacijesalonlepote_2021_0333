@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('termins', function (Blueprint $table) {
             $table->id();
+            
             $table->dateTime('vreme');
             $table->double('ukupnaCena');
             $table->integer('trajanje');
